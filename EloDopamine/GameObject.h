@@ -19,6 +19,7 @@ public:
     Team team{};
     float attackRange{};
     bool targetable{};
+    bool visible{};
     Vector3 position{};
 
     unsigned int address{};

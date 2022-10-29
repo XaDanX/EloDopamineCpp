@@ -21,7 +21,6 @@ void EloDopamine::OnUpdate() {
     e->AddLine(ImVec2(1920, 1080), ImVec2(pWorld.x, pWorld.y), ImColor(0, 255, 0, 100), 2);
 
 
-
 }
 
 void EloDopamine::OnGui() {

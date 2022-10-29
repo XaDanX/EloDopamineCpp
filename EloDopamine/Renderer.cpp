@@ -6,6 +6,8 @@ void Renderer::DrawCircleAt(const Vector3& worldPos, float radius, bool filled, 
 
 	static ImVec2 points[200];
 
+	ImDrawList* canvas = ImGui::GetBackgroundDrawList();
+
 	float step = 6.2831f / numPoints;
 	float theta = 0.f;
 	for (int i = 0; i < numPoints; i++, theta += step) {

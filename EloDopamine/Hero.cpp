@@ -11,6 +11,7 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
     memcpy(&attackRange, &buff[Offsets::ObjATKRange], sizeof(float));
     memcpy(&targetable, &buff[Offsets::ObjTargetable], sizeof(bool));
     memcpy(&position, &buff[Offsets::ObjPos], sizeof(Vector3));
+    memcpy(&visible, &buff[Offsets::ObjVisibility], sizeof(bool));
 
     if (championName.empty()) {
         championName = memoryManager->ReadString(this->address + Offsets::ObjName);
