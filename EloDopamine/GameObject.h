@@ -1,5 +1,6 @@
 #pragma once
 #include "Windows.h"
+#include "Vector.h"
 
 enum Team {
     UNKNOWN = 0, // meant to use for jungle monsters etc.
@@ -18,6 +19,7 @@ public:
     Team team{};
     float attackRange{};
     bool targetable{};
+    Vector3 position{};
 
     unsigned int address{};
 

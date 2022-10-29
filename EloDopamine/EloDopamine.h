@@ -1,6 +1,7 @@
 #pragma once
 #include "Overlay.h"
 #include "ObjectManager.h"
+#include "Engine.h"
 
 class EloDopamine {
 private:

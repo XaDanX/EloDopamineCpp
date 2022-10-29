@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="MemoryManager.cpp">
       <Filter>Memory</Filter>
     </ClCompile>
@@ -44,8 +43,12 @@
     <ClCompile Include="EloDopamine.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Game\Managers</Filter>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Game\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Game\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +72,9 @@
     </Filter>
     <Filter Include="Imgui">
       <UniqueIdentifier>{9a84bdd4-abbe-447e-b44e-53117e9c4a99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Engine">
+      <UniqueIdentifier>{cdd8b798-5c14-46e9-bf0b-9532e2aca3bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -126,8 +132,14 @@
     <ClInclude Include="EloDopamine.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Game\Managers</Filter>
+    <ClInclude Include="Engine.h">
+      <Filter>Game\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Game\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

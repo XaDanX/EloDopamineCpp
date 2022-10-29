@@ -70,11 +70,6 @@ void Overlay::StartFrame()
 
 void Overlay::Update() {
 
-	ImGui::Begin("SUPERKALIFRADALISTODEKSPIALITYCZNE OKNO EEEEE", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-	ImGui::End();
-
-
-
 }
 
 void Overlay::RenderFrame()
@@ -134,7 +129,7 @@ bool Overlay::CreateDeviceD3D(HWND hWnd)
 		nullptr,   
 		&dxDeviceContext);
 
-	IDXGIDevice* dxgiDevice;
+	IDXGIDevice3* dxgiDevice;
 	dxDevice->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice);
 
 	IDXGIAdapter* dxgiAdapter = 0;
@@ -161,6 +156,8 @@ bool Overlay::CreateDeviceD3D(HWND hWnd)
 		nullptr,
 		&dxSwapChain);
 
+	dxgiDevice->SetMaximumFrameLatency(2);
+	dxgiDevice->SetGPUThreadPriority(7);
 	
 	IDCompositionDevice* dcompDevice;
 	DCompositionCreateDevice(

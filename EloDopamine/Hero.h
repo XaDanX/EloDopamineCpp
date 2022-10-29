@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "MemoryManager.h"
 #include "Offsets.h"
+#include "Vector.h"
 
 class Hero : public GameObject {
 public:

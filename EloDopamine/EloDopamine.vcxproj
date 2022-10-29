@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="EloDopamine.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -35,10 +35,11 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Offsets.cpp" />
     <ClCompile Include="Overlay.cpp" />
+    <ClCompile Include="Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EloDopamine.h" />
-    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Engine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="imgui\imconfig.h" />
@@ -50,10 +51,12 @@
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Offsets.h" />
     <ClInclude Include="Overlay.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="XorStr.h" />
   </ItemGroup>

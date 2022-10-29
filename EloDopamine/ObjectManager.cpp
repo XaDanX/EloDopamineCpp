@@ -15,9 +15,9 @@ void ObjectManager::Update() {
 
     if (this->localPlayerPointer == 0) {
         this->localPlayerPointer = memoryManager->Read<int>(memoryManager->BaseAddress() + Offsets::LocalPlayer);
-        this->localPlayer = new Hero(); // allocate at stack;
-        this->localPlayer->Load(localPlayerPointer, true);
+        this->localPlayer = new Hero();
     }
+    this->localPlayer->Load(localPlayerPointer, true);
 
 }
 
