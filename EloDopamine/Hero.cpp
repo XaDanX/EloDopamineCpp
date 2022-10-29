@@ -1,6 +1,7 @@
 #include "Hero.h"
 #include <string>
 bool Hero::Load(unsigned int address, bool deepLoad) {
+    this->address = address;
     memoryManager->ReadBuffer(address, this->buff, Hero::objectSize);
 
     memcpy(&index, &buff[Offsets::ObjectIndex], sizeof(byte));
@@ -11,12 +12,7 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
     memcpy(&targetable, &buff[Offsets::ObjectTargetable], sizeof(bool));
 
     if (championName.empty()) {
-        int championNameAddress;
-        memcpy(&championNameAddress, &buff[Offsets::ObjectName], sizeof(int));
-        char nameBuff[50];
-        championName = memoryManager->ReadString(championNameAddress);
+        championName = memoryManager->ReadString(this->address + Offsets::ObjectName);
     }
-
-
     return true;
 }

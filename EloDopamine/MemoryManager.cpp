@@ -46,10 +46,28 @@ void MemoryManager::ReadBuffer(DWORD addr, void* structure, int size) {
     ReadProcessMemory(this->hProcess, (DWORD*)addr, structure, size, &bytesRead);
 }
 
-std::string MemoryManager::ReadString(DWORD address) {
+std::string MemoryManager::ReadString(DWORD address) { // Ghetto as fuck but riot uses std::string/charmaps randomly and i want one universal method to read them, it works XD
     char nameBuff[50];
     std::string ret;
-    memoryManager->ReadBuffer(address, nameBuff, 50);
+    int addr;
+
+    auto len = this->Read<int>(address + 16);
+    logger->Debug("length: %i", len);
+
+    if (len < 1 or len > 100) {
+        len = this->Read<int>(address + 4);
+        addr = this->Read<int>(address);
+    }
+    else {
+        if (len >= 16) {
+            addr = this->Read<int>(address);
+        }
+        else {
+            addr = address;
+        }
+    }
+
+    memoryManager->ReadBuffer(addr, nameBuff, 50);
     if (StringUtils::IsASCII(nameBuff, 50))
         ret = StringUtils::ToLower(std::string(nameBuff));
     else

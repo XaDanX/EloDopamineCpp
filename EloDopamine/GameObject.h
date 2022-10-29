@@ -11,8 +11,6 @@ class GameObject {
 protected:
     static const SIZE_T objectSize = 0x4000;
     BYTE buff[objectSize];
-private:
-    unsigned int address{};
 public:
     int index{};
     float health{};
@@ -20,6 +18,8 @@ public:
     Team team{};
     float attackRange{};
     bool targetable{};
+
+    unsigned int address{};
 
 
     virtual bool Load(unsigned int address, bool deepLoad);

@@ -23,6 +23,7 @@ int main() {
     logger->Debug("attack range: %f", localPlayer.attackRange);
     logger->Debug("targetable: %s", localPlayer.targetable ? "true" : "false");
     logger->Debug("champion name: %s", localPlayer.championName.c_str());
+    
 
 
     objectManager->Update();
