@@ -52,7 +52,6 @@ std::string MemoryManager::ReadString(DWORD address) { // Ghetto as fuck but rio
     int addr;
 
     auto len = this->Read<int>(address + 16);
-    logger->Debug("length: %i", len);
 
     if (len < 1 or len > 100) {
         len = this->Read<int>(address + 4);
@@ -86,4 +85,8 @@ std::vector<int> MemoryManager::ReadTemplate(int address) {
 
 
     return pointerList;
+}
+
+HWND MemoryManager::GetWindowHandle() {
+    return this->hWindow;
 }

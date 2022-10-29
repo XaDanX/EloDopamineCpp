@@ -1,38 +1,65 @@
-#include <iostream>
-#include "Logger.h"
-#include "MemoryManager.h"
-#include "Offsets.h"
-#include "Hero.h"
-#include "ObjectManager.h"
+#include "EloDopamine.h"
 
-int main() {
-    logger->SetLevel(LogLevel::Debug);
-    memoryManager->Initialize();
-    
-    int localPlayerAddr = memoryManager->Read<int>(memoryManager->BaseAddress() + Offsets::LocalPlayer);
-    logger->Debug("local player address: %#08x", localPlayerAddr);
 
-    Hero localPlayer = Hero();
+void EloDopamine::OnUpdate() {
 
-    localPlayer.Load(localPlayerAddr, false);
+    /*
+        Execute modules here.
+    */
 
-    logger->Debug("index: %i", localPlayer.index);
-    logger->Debug("health: %f", localPlayer.health);
-    logger->Debug("max health: %f", localPlayer.maxHealth);
-    logger->Debug("team: %i", localPlayer.team);
-    logger->Debug("attack range: %f", localPlayer.attackRange);
-    logger->Debug("targetable: %s", localPlayer.targetable ? "true" : "false");
-    logger->Debug("champion name: %s", localPlayer.championName.c_str());
-    
+}
 
+void EloDopamine::OnGui() {
+
+    /*
+        Draw guis here.
+    */
+    ImGui::Begin("Test window", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+    if (ImGui::Button("Button")) {}
+    ImGui::Text("Hello :D");
+    ImGui::End();
+
+}
+
+
+
+void EloDopamine::Update() {
+
+    if (GetAsyncKeyState(VK_INSERT) & 1) {
+        this->isGuiOpen = !this->isGuiOpen;
+        this->overlay.ToggleTransparent();
+        this->overlay.Show();
+    }
 
     objectManager->Update();
 
-    for (auto hero : objectManager->GetHeroList()) {
-        logger->Info(hero.championName.c_str());
+    this->overlay.StartFrame(); // start frame
+    this->OnUpdate();
+
+    if (this->isGuiOpen) {
+        this->OnGui();
     }
-     
+
+    this->overlay.RenderFrame(); // end frame
+
+
+}
+
+void EloDopamine::Initialize() {
+    bool memoryCreateResult{false};
+    while (memoryCreateResult == false) {
+        memoryCreateResult = memoryManager->Initialize();
+        Sleep(1000);
+    }
+
+    // TODO:: ADD CHECKS FOR GAME TIME!
 
 
 
+    SetActiveWindow(memoryManager->GetWindowHandle());
+	this->overlay = Overlay();
+	this->overlay.Init();
+    this->overlay.ToggleTransparent();
+    
+    this->Update(); // initial update
 }

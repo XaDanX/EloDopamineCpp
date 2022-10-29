@@ -10,9 +10,14 @@ private:
 
     int heroListPtr;
 
+    int localPlayerPointer{ 0 };
+    Hero* localPlayer;
+
 
 public:
     std::vector<Hero> GetHeroList();
+
+    Hero* GetLocalPlayer();
 
     void Update();
 };
