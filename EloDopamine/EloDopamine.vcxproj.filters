@@ -50,6 +50,9 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Game\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Spell.cpp">
+      <Filter>Game\GameObjects\SpellBook</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Memory">
@@ -75,6 +78,9 @@
     </Filter>
     <Filter Include="Game\Engine">
       <UniqueIdentifier>{cdd8b798-5c14-46e9-bf0b-9532e2aca3bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObjects\SpellBook">
+      <UniqueIdentifier>{0fa4ac46-2630-42e1-a133-696f42f5a758}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>Game\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Spell.h">
+      <Filter>Game\GameObjects\SpellBook</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

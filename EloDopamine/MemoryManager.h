@@ -30,6 +30,7 @@ public:
 
     void ReadBuffer(DWORD addr, void* structure, int size);
     std::string ReadString(DWORD address);
+    std::string ReadStringSized(DWORD address, int size);
     std::vector<int> ReadTemplate(int address);
     HWND GetWindowHandle();
 

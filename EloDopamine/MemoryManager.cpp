@@ -53,7 +53,7 @@ std::string MemoryManager::ReadString(DWORD address) { // Ghetto as fuck but rio
 
     auto len = this->Read<int>(address + 16);
 
-    if (len < 1 or len > 100) {
+    if (len < 1 or len > 50) {
         len = this->Read<int>(address + 4);
         addr = this->Read<int>(address);
     }
@@ -72,6 +72,18 @@ std::string MemoryManager::ReadString(DWORD address) { // Ghetto as fuck but rio
     else
         ret = std::string("");
     return ret;
+}
+
+std::string MemoryManager::ReadStringSized(DWORD address, int size)
+{
+    char nameBuff[30];
+    memoryManager->ReadBuffer(address, nameBuff, size);
+    if (StringUtils::IsASCII(nameBuff, 30)) {
+        return StringUtils::ToLower(std::string(nameBuff));
+    }
+    else {
+        return std::string("");
+    }
 }
 
 std::vector<int> MemoryManager::ReadTemplate(int address) {

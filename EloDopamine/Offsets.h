@@ -72,6 +72,9 @@ public:
     static int AIManagerNavGrid;
     static int AIManagerCurrentSegment;
     static int SpellSlotLevel;
+    
+    static int SpellInfoSpellName;
+
     static int SpellSlotTime;
     static int SpellSlotCharges;
     static int SpellSlotTimeCharge;

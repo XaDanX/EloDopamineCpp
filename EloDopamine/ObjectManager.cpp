@@ -13,16 +13,11 @@ void ObjectManager::Update() {
         this->heroList.emplace_back(currentHero);
     }
 
-    if (this->localPlayerPointer == 0) {
-        this->localPlayerPointer = memoryManager->Read<int>(memoryManager->BaseAddress() + Offsets::LocalPlayer);
-        this->localPlayer = new Hero();
-    }
-    this->localPlayer->Load(localPlayerPointer, true);
 
 }
 
-Hero* ObjectManager::GetLocalPlayer() {
-    return this->localPlayer;
+Hero ObjectManager::GetLocalPlayer() {
+    return this->heroList[0];
 }
 
 std::vector<Hero> ObjectManager::GetHeroList() {

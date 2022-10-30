@@ -82,9 +82,13 @@ int	Offsets::SpellSlotTime = 0x28;
 int	Offsets::SpellSlotCharges = 0x58;
 int	Offsets::SpellSlotTimeCharge = 0x78;
 int	Offsets::SpellSlotDamage = 0x94;
-int	Offsets::SpellSlotSpellInfo = 0x144;
+
+int	Offsets::SpellSlotSpellInfo = 0x120;
+int Offsets::SpellInfoSpellName = 0x18;
+
 int	Offsets::SpellInfoSpellData = 0x44;
 int	Offsets::SpellDataSpellName = 0x6C;
+
 int	Offsets::SpellDataMissileName = 0x6C;
 int	Offsets::SpellSlotSmiteTimer = 0x64;
 int	Offsets::SpellSlotSmiteCharges = 0x58;
