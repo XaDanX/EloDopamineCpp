@@ -17,7 +17,7 @@ int	Offsets::TurretInterface = 0x3124C1C; //8B 35 ? ? ? ? 8B 76 18 // 8D 44 24 0
 int	Offsets::InhibitorInterface = 0x313D514; //A1 ?? ?? ?? ?? 53 55 56 8B 70 04 8B 40 08
 int	Offsets::HeroInterface = 0x188FE14; //89 44 24 18 A1 ? ? ? ? 53 // 8B 15 ? ? ? ? 0F 44 C1
 int	Offsets::BuildingInterface = 0x1859378;
-int	Offsets::oGetHPBarPos = 0x604F30;  //E8 ?? ?? ?? ?? 8B 4E ?? 8D 54 ?? ?? 52 8B 01 FF ?? ?? 5E 83 ?? ?? C3
+int	Offsets::oGetHPBarPos = 0x30C9;  //E8 ?? ?? ?? ?? 8B 4E ?? 8D 54 ?? ?? 52 8B 01 FF ?? ?? 5E 83 ?? ?? C3
 int	Offsets::AINetClient = 0x31351C0; //8B 0D ?? ?? ?? ?? 85 C9 74 06 8B 01 6A 01 FF 10 8B 0D ?? ?? ?? ?? C7 05 ?? ?? ?? ?? ?? ?? ?? ?? 85 C9 74 06 8B 01 6A 01 FF 10 C3 //C7 05 ? ? ? ? ? ? ? ? 85 C9 74 06 8B 01 6A 01 FF 10 C3 - //A1 ?? ?? ?? ?? 88 4C 24 13
 int	Offsets::CpuInstance = 0x3135184;
 //== MINIMAP STRUCTURE ==//
@@ -77,8 +77,8 @@ int	Offsets::AIManagerNavigationArrayLength = 0x1E8;
 int	Offsets::AIManagerPosition = 0x2EC;
 int	Offsets::AIManagerNavGrid = 0x1B0;
 //== Spell STRUCTURE ==//
-int	Offsets::SpellSlotLevel = 0x20;
-int	Offsets::SpellSlotTime = 0x28;
+int	Offsets::SpellSlotLevel = 0x1C;
+int	Offsets::SpellSlotTime = 0x24;
 int	Offsets::SpellSlotCharges = 0x58;
 int	Offsets::SpellSlotTimeCharge = 0x78;
 int	Offsets::SpellSlotDamage = 0x94;

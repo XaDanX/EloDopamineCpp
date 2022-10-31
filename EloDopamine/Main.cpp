@@ -9,5 +9,6 @@ int main() {
 
     while (true) {
         eloDopamine->Update();
+        Sleep(1); // processor need a rest ;o
     }
 }

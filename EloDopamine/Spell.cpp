@@ -2,10 +2,15 @@
 
 void Spell::Update() {
 	memoryManager->ReadBuffer(this->address, this->buff, this->spellSlotSize);
-	int test = 0;
-	memcpy(&test, &buff[Offsets::SpellSlotSpellInfo], sizeof(int));
-	char nameBuff[16];
-	memoryManager->ReadBuffer(test + 0x18, nameBuff, 16);
 
-	auto test1 = memoryManager->ReadString(test + 0x18);
+	memcpy(&this->level, &buff[Offsets::SpellSlotLevel], sizeof(int));
+	memcpy(&this->readyAt, &buff[Offsets::SpellSlotTime], sizeof(float));
+
+
+
+	if (name.empty()) {
+		int nameAddress = 0;
+		memcpy(&nameAddress, &buff[Offsets::SpellSlotSpellInfo], sizeof(int));
+		this->name = memoryManager->ReadString(nameAddress + 0x18);
+	}
 }

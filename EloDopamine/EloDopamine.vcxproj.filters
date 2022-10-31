@@ -53,6 +53,9 @@
     <ClCompile Include="Spell.cpp">
       <Filter>Game\GameObjects\SpellBook</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectView.cpp">
+      <Filter>Modules\ObjectView</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Memory">
@@ -81,6 +84,12 @@
     </Filter>
     <Filter Include="Game\GameObjects\SpellBook">
       <UniqueIdentifier>{0fa4ac46-2630-42e1-a133-696f42f5a758}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{26537a43-1845-4004-be60-834b7698770f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\ObjectView">
+      <UniqueIdentifier>{1148f859-dfb4-4b4c-a109-36c308746f97}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +158,12 @@
     </ClInclude>
     <ClInclude Include="Spell.h">
       <Filter>Game\GameObjects\SpellBook</Filter>
+    </ClInclude>
+    <ClInclude Include="Module.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectView.h">
+      <Filter>Modules\ObjectView</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

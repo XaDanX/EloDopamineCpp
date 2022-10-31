@@ -28,6 +28,7 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
     this->UpdateSpells();
 
 
+
     return true;
 }
 
@@ -39,4 +40,13 @@ void Hero::UpdateSpells() {
     this->R_SPELL.Update();
     this->D_SPELL.Update();
     this->F_SPELL.Update();
+}
+
+Vector2 Hero::GetHealthBarPosition() {
+    Vector3 point = position.clone();
+    point.x += 85.0; // health bar height, but i haven't implemented these yet (85 is for twitch xd)
+
+    Vector2 out = engine->WorldToScreen(point);
+    out.y -= (engine->WindowHeight() * 0.00083333335f * 85.0);
+    out.x -= 70.0f;
 }

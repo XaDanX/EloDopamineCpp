@@ -4,6 +4,7 @@
 #include "Offsets.h"
 #include "Vector.h"
 #include "Spell.h"
+#include "Engine.h"
 
 class Hero : public GameObject {
 private:
@@ -20,4 +21,7 @@ public:
 public:
     bool Load(unsigned int address, bool deepLoad);
     void UpdateSpells();
+
+    Vector2 GetHealthBarPosition();
+
 };

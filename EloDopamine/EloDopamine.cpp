@@ -1,7 +1,12 @@
 #include "EloDopamine.h"
 #include "Renderer.h"
 #include "imgui/imgui.h"
+#include "ObjectView.h"
 #include <chrono>
+
+namespace {
+    ObjectView objectView = ObjectView();
+}
 
 void EloDopamine::OnUpdate() {
 
@@ -11,18 +16,6 @@ void EloDopamine::OnUpdate() {
 
     renderer->DrawCircleAt(objectManager->GetLocalPlayer().position, 600 + 65, false, 190, ImColor(255, 0, 0, 120), 5);
 
-    ImDrawList* e = ImGui::GetBackgroundDrawList();
-
-    Vector2 pWorld = engine->WorldToScreen(objectManager->GetLocalPlayer().position);
-
-    e->AddLine(ImVec2(0, 0), ImVec2(pWorld.x, pWorld.y), ImColor(0, 255, 0, 100), 2);
-    e->AddLine(ImVec2(1920, 0), ImVec2(pWorld.x, pWorld.y), ImColor(0, 255, 0, 100), 2);
-    e->AddLine(ImVec2(0, 1080), ImVec2(pWorld.x, pWorld.y), ImColor(0, 255, 0, 100), 2);
-    e->AddLine(ImVec2(1920, 1080), ImVec2(pWorld.x, pWorld.y), ImColor(0, 255, 0, 100), 2);
-
-    for (Hero r : objectManager->GetHeroList()) {
-    }
-
 }
 
 void EloDopamine::OnGui() {
@@ -30,6 +23,8 @@ void EloDopamine::OnGui() {
     /*
         Draw guis here.
     */
+    objectView.OnGui();
+
     ImGui::Begin("Test window", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
     ImGui::Text("Hello :D");
     ImGui::End();
