@@ -5,6 +5,7 @@
 #include "Vector.h"
 #include "Spell.h"
 #include "Engine.h"
+#include "GameData.h"
 
 class Hero : public GameObject {
 private:

@@ -167,6 +167,7 @@ int	Offsets::ObjLifeSteal = 0x12A0;
 int	Offsets::ObjCritChance = 0x12E0;
 int	Offsets::ObjIsZombie = 0x3A;
 int	Offsets::ObjIsOnScreen = 0x278;
+int Offsets::ObjActionState = 0x1114;
 ////CHARDATA///
 int	Offsets::ObjPreCharData = 0x2E04;
 int	Offsets::ObjCharData = 0x1C;

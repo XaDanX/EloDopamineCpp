@@ -158,6 +158,7 @@ public:
     static int ObjCritChance;
     static int ObjIsZombie;
     static int ObjIsOnScreen;
+    static int ObjActionState;
     ////CHARDATA///
     static int ObjPreCharData;
     static int ObjCharData;

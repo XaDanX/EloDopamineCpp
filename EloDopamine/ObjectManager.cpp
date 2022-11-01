@@ -13,7 +13,6 @@ void ObjectManager::Update() {
         this->heroList.emplace_back(currentHero);
     }
 
-
 }
 
 Hero ObjectManager::GetLocalPlayer() {

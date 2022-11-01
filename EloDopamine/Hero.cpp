@@ -1,5 +1,4 @@
 #include "Hero.h"
-
 bool Hero::Load(unsigned int address, bool deepLoad) {
     this->address = address;
     memoryManager->ReadBuffer(address, this->buff, Hero::objectSize);
@@ -12,11 +11,16 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
     memcpy(&targetable, &buff[Offsets::ObjTargetable], sizeof(bool));
     memcpy(&position, &buff[Offsets::ObjPos], sizeof(Vector3));
     memcpy(&visible, &buff[Offsets::ObjVisibility], sizeof(bool));
+    memcpy(&actionState, &buff[Offsets::ObjActionState], sizeof(uint16_t));
     memcpy(&spellBookPointers, &buff[Offsets::ObjSpellBOOK], sizeof(int) * 6);
 
     if (championName.empty()) {
         championName = memoryManager->ReadString(this->address + Offsets::ObjName);
     }
+
+    if (this->unitInfo == nullptr)
+        this->unitInfo = gameData->GetUnitInfoByName(this->championName);
+   
 
 
     this->Q_SPELL.address = this->spellBookPointers[0];
@@ -44,9 +48,10 @@ void Hero::UpdateSpells() {
 
 Vector2 Hero::GetHealthBarPosition() {
     Vector3 point = position.clone();
-    point.x += 85.0; // health bar height, but i haven't implemented these yet (85 is for twitch xd)
+    point.y += this->unitInfo->healthBarHeight; // health bar height, but i haven't implemented these yet (85 is for twitch xd)
 
     Vector2 out = engine->WorldToScreen(point);
-    out.y -= (engine->WindowHeight() * 0.00083333335f * 85.0);
+    out.y -= (engine->WindowHeight() * 0.00083333335f * this->unitInfo->healthBarHeight);
     out.x -= 70.0f;
+    return out;
 }

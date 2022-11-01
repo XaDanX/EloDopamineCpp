@@ -3,7 +3,7 @@
 #include "imgui/imgui.h"
 #include "ObjectView.h"
 #include <chrono>
-
+#include "GameData.h"
 namespace {
     ObjectView objectView = ObjectView();
 }
@@ -13,8 +13,14 @@ void EloDopamine::OnUpdate() {
     /*
         Execute modules here.
     */
+    Hero hero = objectManager->GetLocalPlayer();
 
-    renderer->DrawCircleAt(objectManager->GetLocalPlayer().position, 600 + 65, false, 190, ImColor(255, 0, 0, 120), 5);
+    renderer->DrawCircleAt(hero.position, hero.GetUnitInfo()->gameplayRadius + hero.attackRange, false, 190, ImColor(255, 0, 0, 120), 5);
+
+    ImDrawList* e = ImGui::GetBackgroundDrawList();
+    auto healthBarPosition = hero.GetHealthBarPosition();
+
+    e->AddText(ImVec2(healthBarPosition.x, healthBarPosition.y), ImColor(255, 0, 0, 255), hero.CanAttack() ? "true"  : "false");
 
 }
 
@@ -24,11 +30,6 @@ void EloDopamine::OnGui() {
         Draw guis here.
     */
     objectView.OnGui();
-
-    ImGui::Begin("Test window", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-    ImGui::Text("Hello :D");
-    ImGui::End();
-
 
 }
 
@@ -74,5 +75,9 @@ void EloDopamine::Initialize() {
 	this->overlay.Init();
     this->overlay.ToggleTransparent();
     
+    gameData->Load(deployablePath);
+
+    logger->Info("Initialized!");
+
     this->Update(); // initial update
 }

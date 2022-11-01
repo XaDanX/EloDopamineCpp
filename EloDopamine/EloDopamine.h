@@ -3,6 +3,10 @@
 #include "ObjectManager.h"
 #include "Engine.h"
 
+namespace {
+	std::string deployablePath("C:\\Deployable");
+}
+
 class EloDopamine {
 private:
 	Overlay overlay;

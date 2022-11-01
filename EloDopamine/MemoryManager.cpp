@@ -1,6 +1,7 @@
 #include "MemoryManager.h"
 #include "StringUtils.h"
 
+
 bool MemoryManager::Initialize() {
 
     hWindow = FindWindowA("RiotWindowClass", nullptr);

@@ -56,6 +56,12 @@
     <ClCompile Include="ObjectView.cpp">
       <Filter>Modules\ObjectView</Filter>
     </ClCompile>
+    <ClCompile Include="UnitInfo.cpp">
+      <Filter>Game\GameData</Filter>
+    </ClCompile>
+    <ClCompile Include="GameData.cpp">
+      <Filter>Game\GameData</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Memory">
@@ -90,6 +96,9 @@
     </Filter>
     <Filter Include="Modules\ObjectView">
       <UniqueIdentifier>{1148f859-dfb4-4b4c-a109-36c308746f97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameData">
+      <UniqueIdentifier>{698db342-2d8b-46a9-9ad2-b80726d9eb7b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +173,12 @@
     </ClInclude>
     <ClInclude Include="ObjectView.h">
       <Filter>Modules\ObjectView</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitInfo.h">
+      <Filter>Game\GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="GameData.h">
+      <Filter>Game\GameData</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

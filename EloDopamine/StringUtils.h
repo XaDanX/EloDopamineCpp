@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include <algorithm>
-namespace StringUtils {
-    bool IsASCII(const char *buff, int maxSize) {
+inline namespace StringUtils {
+    inline bool IsASCII(const char *buff, int maxSize) {
         for (int i = 0; i < maxSize; ++i) {
             if (buff[i] == 0)
                 return true;
@@ -12,7 +12,7 @@ namespace StringUtils {
         return true;
     }
 
-    std::string ToLower(std::string str) {
+    inline std::string ToLower(std::string str) {
         std::string strLower;
         strLower.resize(str.size());
 
