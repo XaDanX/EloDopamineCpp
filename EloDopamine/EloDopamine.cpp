@@ -3,34 +3,16 @@
 #include "imgui/imgui.h"
 #include "ObjectView.h"
 #include <chrono>
+#include "ModuleManager.h"
 #include "GameData.h"
-namespace {
-    ObjectView objectView = ObjectView();
-}
+
 
 void EloDopamine::OnUpdate() {
-
-    /*
-        Execute modules here.
-    */
-    Hero hero = objectManager->GetLocalPlayer();
-
-    renderer->DrawCircleAt(hero.position, hero.GetUnitInfo()->gameplayRadius + hero.attackRange, false, 190, ImColor(255, 0, 0, 120), 5);
-
-    ImDrawList* e = ImGui::GetBackgroundDrawList();
-    auto healthBarPosition = hero.GetHealthBarPosition();
-
-    e->AddText(ImVec2(healthBarPosition.x, healthBarPosition.y), ImColor(255, 0, 0, 255), hero.CanAttack() ? "true"  : "false");
-
+    moduleManager->UpdateModules();
 }
 
 void EloDopamine::OnGui() {
-
-    /*
-        Draw guis here.
-    */
-    objectView.OnGui();
-
+    moduleManager->UpdateModulesGui();
 }
 
 
@@ -38,21 +20,21 @@ void EloDopamine::OnGui() {
 void EloDopamine::Update() {
     if (GetAsyncKeyState(VK_INSERT) & 1) {
         this->isGuiOpen = !this->isGuiOpen;
-        this->overlay.ToggleTransparent();
-        this->overlay.Show();
+        this->overlay->ToggleTransparent();
+        this->overlay->Show();
     }
 
     engine->Update();
     objectManager->Update();
 
-    this->overlay.StartFrame();
+    this->overlay->StartFrame();
     this->OnUpdate();
 
     if (this->isGuiOpen) {
         this->OnGui();
     }
 
-    this->overlay.RenderFrame(); 
+    this->overlay->RenderFrame(); 
 
 }
 
@@ -71,13 +53,18 @@ void EloDopamine::Initialize() {
 
 
     SetActiveWindow(memoryManager->GetWindowHandle());
-	this->overlay = Overlay();
-	this->overlay.Init();
-    this->overlay.ToggleTransparent();
+	this->overlay = new Overlay();
+	this->overlay->Init();
+    this->overlay->ToggleTransparent();
     
     gameData->Load(deployablePath);
 
-    logger->Info("Initialized!");
+    logger->Info("Initializing modules..");
 
     this->Update(); // initial update
+
+    moduleManager->Initialize();
+
+    logger->Info("Initialization done!");
+
 }

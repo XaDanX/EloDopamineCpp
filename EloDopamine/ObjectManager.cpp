@@ -22,3 +22,5 @@ Hero ObjectManager::GetLocalPlayer() {
 std::vector<Hero> ObjectManager::GetHeroList() {
     return this->heroList;
 }
+
+

@@ -14,3 +14,7 @@ void Spell::Update() {
 		this->name = memoryManager->ReadString(nameAddress + 0x18);
 	}
 }
+
+bool Spell::IsReady() {
+	return (engine->GameTime() - this->readyAt) > 0;
+}

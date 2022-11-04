@@ -1,7 +1,7 @@
 #include "Overlay.h"
 #include <dcomp.h>
 #include <d3d11.h>
-
+#include "StringUtils.h"
 ID3D11Device* Overlay::dxDevice = NULL;
 ID3D11DeviceContext* Overlay::dxDeviceContext = NULL;
 IDXGISwapChain1* Overlay::dxSwapChain = NULL;
@@ -11,8 +11,8 @@ Overlay::Overlay(){
 }
 
 void Overlay::Init() {
-	std::string windowClassName = "qqq";
-	std::string windowName = "www";
+	std::string windowClassName = RandomString(11);
+	std::string windowName = RandomString(11);
 	SetConsoleTitleA(windowName.c_str());
 
 	WNDCLASSEXA wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, windowClassName.c_str(), NULL };
@@ -28,6 +28,7 @@ void Overlay::Init() {
 		return;
 	}
 
+	SetWindowLong(hWindow, GWL_STYLE, 0);
 	ShowWindow(hWindow, SW_SHOW);
 
 
@@ -142,7 +143,7 @@ bool Overlay::CreateDeviceD3D(HWND hWnd)
 	description.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
 	description.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 	description.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;
-	description.BufferCount = 2;
+	description.BufferCount = 6;
 	description.SampleDesc.Count = 1;
 	description.AlphaMode = DXGI_ALPHA_MODE_PREMULTIPLIED;
 	description.Scaling = DXGI_SCALING_STRETCH;

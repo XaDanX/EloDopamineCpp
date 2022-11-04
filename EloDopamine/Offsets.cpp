@@ -1,21 +1,23 @@
 #include "Offsets.h"
 
+
+//"version": "12.21.4770420+branch.releases-12-21.content.release"
 Offsets::Offsets() {};
 
 int Offsets::RendererWidth = 0x8;
 int Offsets::RendererHeight = 0xc;
 //== CORE ==//
-int	Offsets::ViewProjMatrices = 0x315A560; //68 ? ? ? ? 51 8B 00
-int Offsets::LocalPlayer = 0x312D8CC; //57 8B 3D ? ? ? ? 3B F7 75
-int Offsets::GameTime = 0x31260D8; //F3 0F 11 05 ? ? ? ? 8B 49
+int	Offsets::ViewProjMatrices = 0x3181d70; //68 ? ? ? ? 51 8B 00
+int Offsets::LocalPlayer = 0x3157f40; //57 8B 3D ? ? ? ? 3B F7 75
+int Offsets::GameTime = 0x3152068; //F3 0F 11 05 ? ? ? ? 8B 49
 int Offsets::ObjectManager = 0x188FD7C; //89 ? ? ? ? ? 57 C7 06 ? ? ? ? 66 C7 46 04 ? ?
-int Offsets::Renderer = 0x315FFAC; //8B 0D ? ? ? ? 50 E8 ? ? ? ? 5E 8B // A1 ?? ?? ?? ?? 56 57 BF ?? ?? ?? ?? 8B
+int Offsets::Renderer = 0x3187448; //8B 0D ? ? ? ? 50 E8 ? ? ? ? 5E 8B // A1 ?? ?? ?? ?? 56 57 BF ?? ?? ?? ?? 8B
 //== LISTS ==//
 int	Offsets::MissileInterface = 0x312D904; //8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B 30 8B 36
 int	Offsets::MinionInterface = 0x24DD710; //8B 0D ? ? ? ? E8 ? ? ? ? EB 09 // A3 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 C4 04 85 C0 74 32
 int	Offsets::TurretInterface = 0x3124C1C; //8B 35 ? ? ? ? 8B 76 18 // 8D 44 24 0C 89 35 ? ? ? ? // A1 ? ? ? ? 53 56 8B 70 04
 int	Offsets::InhibitorInterface = 0x313D514; //A1 ?? ?? ?? ?? 53 55 56 8B 70 04 8B 40 08
-int	Offsets::HeroInterface = 0x188FE14; //89 44 24 18 A1 ? ? ? ? 53 // 8B 15 ? ? ? ? 0F 44 C1
+int	Offsets::HeroInterface = 0x18BBF40; //89 44 24 18 A1 ? ? ? ? 53 // 8B 15 ? ? ? ? 0F 44 C1
 int	Offsets::BuildingInterface = 0x1859378;
 int	Offsets::oGetHPBarPos = 0x30C9;  //E8 ?? ?? ?? ?? 8B 4E ?? 8D 54 ?? ?? 52 8B 01 FF ?? ?? 5E 83 ?? ?? C3
 int	Offsets::AINetClient = 0x31351C0; //8B 0D ?? ?? ?? ?? 85 C9 74 06 8B 01 6A 01 FF 10 8B 0D ?? ?? ?? ?? C7 05 ?? ?? ?? ?? ?? ?? ?? ?? 85 C9 74 06 8B 01 6A 01 FF 10 C3 //C7 05 ? ? ? ? ? ? ? ? 85 C9 74 06 8B 01 6A 01 FF 10 C3 - //A1 ?? ?? ?? ?? 88 4C 24 13
@@ -140,10 +142,10 @@ int	Offsets::ObjBonusAP = ObjBonusATK + 0x10;
 int	Offsets::ObjBonusAPMOD = ObjBonusAP + 0x4;
 int	Offsets::ObjATTACKSPEEDMOD = 0x1268;
 int	Offsets::ObjMOVESPEED = 0x1394;
-int	Offsets::ObjSpellBOOK = 0x29B0; //8B 84 83 ? ? ? ? EB 06 8B 83 ? ? ? ? 85 C0 0F 84 ? ? ? ? 53 8B CF E8 ? ? ? ? 8B C8 8B 10 FF 52 18 8B F0
+int	Offsets::ObjSpellBOOK = 0x29B8; //8B 84 83 ? ? ? ? EB 06 8B 83 ? ? ? ? 85 C0 0F 84 ? ? ? ? 53 8B CF E8 ? ? ? ? 8B C8 8B 10 FF 52 18 8B F0
 int	Offsets::ObjSpellBOK2 = 0x2508; //ObjSpellBOOK+0x20
 int	Offsets::ObjTRANSFORMATION = 0x3040;
-int	Offsets::ObjName = 0x2D9C;
+int	Offsets::ObjName = 0x2DA4;
 int	Offsets::ObjLVL = 0x3584; // ó 0x353C
 int	Offsets::ObjSIZEMULTIPLIER = 0x136C;
 int	Offsets::ObjEXPIRY = 0x298;

@@ -33,6 +33,7 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
+    <ClCompile Include="ModuleManager.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="ObjectView.cpp" />
     <ClCompile Include="Offsets.cpp" />
@@ -59,6 +60,7 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="Module.h" />
+    <ClInclude Include="ModuleManager.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="ObjectView.h" />
     <ClInclude Include="Offsets.h" />

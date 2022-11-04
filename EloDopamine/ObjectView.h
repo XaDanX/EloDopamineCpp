@@ -1,8 +1,11 @@
 #pragma once
 #include "Module.h"
-class ObjectView : ModuleBase {
+#include "ModuleManager.h"
+class ObjectView : public ModuleBase {
 public:
 	void OnUpdate();
 	void OnGui();
+	std::string ModuleType();
+	std::string GetName();
 };
 

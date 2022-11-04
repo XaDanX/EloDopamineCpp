@@ -3,6 +3,7 @@
 #include <string>
 #include "MemoryManager.h"
 #include "Offsets.h"
+#include "Engine.h"
 
 class Spell {
 public:
@@ -20,6 +21,7 @@ public:
 	float readyAt = 0;
 
 	void Update();
+	bool IsReady();
 
 };
 

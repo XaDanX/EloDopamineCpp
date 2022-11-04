@@ -9,7 +9,7 @@
 
 class Hero : public GameObject {
 private:
-    int spellBookPointers[6]; // 6 spells, spell = pointer
+    int spellBookPointers[6];
 public:
     std::string championName;
 

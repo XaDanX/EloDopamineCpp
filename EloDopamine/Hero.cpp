@@ -48,7 +48,7 @@ void Hero::UpdateSpells() {
 
 Vector2 Hero::GetHealthBarPosition() {
     Vector3 point = position.clone();
-    point.y += this->unitInfo->healthBarHeight; // health bar height, but i haven't implemented these yet (85 is for twitch xd)
+    point.y += this->unitInfo->healthBarHeight;
 
     Vector2 out = engine->WorldToScreen(point);
     out.y -= (engine->WindowHeight() * 0.00083333335f * this->unitInfo->healthBarHeight);
