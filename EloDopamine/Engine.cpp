@@ -32,8 +32,14 @@ int Engine::WindowHeight()
 	return this->windowHeight;
 }
 
-Vector2 Engine::WorldToScreen(const Vector3& pos)
-{
+void Engine::UpdateLoopThread() {
+	while (true) {
+		this->Update();
+		std::this_thread::sleep_for(1ms);
+	}
+}
+
+Vector2 Engine::WorldToScreen(const Vector3& pos) {
 	Vector2 out = { 0.f, 0.f };
 	Vector2 screen = { (float)this->windowWidth, (float)windowHeight };
 	static Vector4 clipCoords;

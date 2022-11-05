@@ -63,6 +63,6 @@ float Hero::GetTotalAttackSpeed() {
 }
 
 float Hero::DistanceToHero(Hero hero) {
-    return sqrt(powf((this->position.x - hero.position.x), 2) + powf((this->position.y - hero.position.y), 2));
+    return sqrt(powf((this->position.x - hero.position.x), 2) + powf((this->position.y - hero.position.y), 2) + powf((this->position.z - hero.position.z), 2));
 }
 

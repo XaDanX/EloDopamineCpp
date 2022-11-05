@@ -3,6 +3,7 @@
 #include "MouseMoveOrder.h"
 #include "RightClickOrder.h"
 #include "BlockInputOrder.h"
+using namespace std::chrono_literals;
 
 void InputController::MoveCursor(float x, float y) {
 	static float fScreenWidth = (float)::GetSystemMetrics(SM_CXSCREEN) - 1;
@@ -68,7 +69,7 @@ void InputController::IssueClickAt(int x, int y) {
 	this->orderQueue.emplace(new BlockInputOrder(true));
 	this->orderQueue.emplace(new MouseMoveOrder(x, y));
 	this->orderQueue.emplace(new RightClickOrder(0));
-	this->orderQueue.emplace(new TimeoutOrder(1));
+	this->orderQueue.emplace(new TimeoutOrder(8));
 	this->orderQueue.emplace(new RightClickOrder(1));
 	this->orderQueue.emplace(new MouseMoveOrder(lastPos.x, lastPos.y));
 	this->orderQueue.emplace(new BlockInputOrder(false));
@@ -84,4 +85,11 @@ Vector2 InputController::GetCursorPosition() {
 	POINT pos;
 	GetCursorPos(&pos);
 	return { (float)pos.x, (float)pos.y };
+}
+
+void InputController::UpdateLoopThread() {
+	while (true) {
+		this->Update();
+		std::this_thread::sleep_for(1ms);
+	}
 }

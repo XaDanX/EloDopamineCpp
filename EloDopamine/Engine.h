@@ -3,6 +3,10 @@
 #include "Offsets.h"
 #include "Vector.h"
 #include "Math.h"
+#include <thread>
+#include <chrono>
+
+using namespace std::chrono_literals;
 class Engine {
 private:
 	float gameTime{ 0 };
@@ -22,6 +26,11 @@ public:
 	float GameTime();
 	int WindowWidth();
 	int WindowHeight();
+
+	void UpdateLoopThread();
+	std::thread spawn() {
+		return std::thread([this] { this->UpdateLoopThread(); });
+	}
 
 	Vector2 WorldToScreen(const Vector3& pos);
 

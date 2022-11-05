@@ -5,11 +5,12 @@
 #include <chrono>
 #include "ModuleManager.h"
 #include "GameData.h"
+#include <thread>
+#include <iostream>
 
 
 void EloDopamine::OnUpdate() {
     moduleManager->UpdateModules();
-    inputController->Update();
 }
 
 void EloDopamine::OnGui() {
@@ -27,7 +28,6 @@ void EloDopamine::Update() {
         this->overlay->Show();
     }
 
-    engine->Update();
     objectManager->Update();
 
     this->overlay->StartFrame();
@@ -67,8 +67,12 @@ void EloDopamine::Initialize() {
     gameData->Load(deployablePath);
 
     logger->Info("Initializing modules..");
+    engine->Update();
 
-    this->Update(); // initial update
+    std::thread engineUpdateThread = engine->spawn();
+    std::thread inputUpdateThread = inputController->spawn();
+    engineUpdateThread.detach();
+    inputUpdateThread.detach();
 
     moduleManager->Initialize();
 

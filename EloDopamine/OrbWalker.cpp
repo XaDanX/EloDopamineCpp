@@ -67,7 +67,7 @@ void OrbWalker::OnUpdate() {
 			}
 			if (OrbWalkerUtils::CanMove()) {
 				inputController->IssueClick();
-				OrbWalkerUtils::lastMoveTick = GetTickCount64() + 50;
+				OrbWalkerUtils::lastMoveTick = GetTickCount64() + 60;
 			}
 		}
 

@@ -4,6 +4,7 @@
 #include "EloDopamine.h"
 #include "GameData.h"
 
+using namespace std::chrono_literals;
 
 int main() {
     logger->SetLevel(LogLevel::Debug);
@@ -12,5 +13,6 @@ int main() {
 
     while (true) {
         eloDopamine->Update();
+        std::this_thread::sleep_for(1ms);
     }
 }
