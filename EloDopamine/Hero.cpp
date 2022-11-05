@@ -13,6 +13,7 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
     memcpy(&visible, &buff[Offsets::ObjVisibility], sizeof(bool));
     memcpy(&actionState, &buff[Offsets::ObjActionState], sizeof(uint16_t));
     memcpy(&spellBookPointers, &buff[Offsets::ObjSpellBOOK], sizeof(int) * 6);
+    memcpy(&attackSpeedMult, &buff[Offsets::ObjATKSpeedMulti], sizeof(float));
 
     if (championName.empty()) {
         championName = memoryManager->ReadString(this->address + Offsets::ObjName);
@@ -22,14 +23,15 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
         this->unitInfo = gameData->GetUnitInfoByName(this->championName);
    
 
-
-    this->Q_SPELL.address = this->spellBookPointers[0];
-    this->W_SPELL.address = this->spellBookPointers[1];
-    this->E_SPELL.address = this->spellBookPointers[2];
-    this->R_SPELL.address = this->spellBookPointers[3];
-    this->D_SPELL.address = this->spellBookPointers[4];
-    this->F_SPELL.address = this->spellBookPointers[5];
-    this->UpdateSpells();
+    if (this->visible) {
+        this->Q_SPELL.address = this->spellBookPointers[0];
+        this->W_SPELL.address = this->spellBookPointers[1];
+        this->E_SPELL.address = this->spellBookPointers[2];
+        this->R_SPELL.address = this->spellBookPointers[3];
+        this->D_SPELL.address = this->spellBookPointers[4];
+        this->F_SPELL.address = this->spellBookPointers[5];
+        this->UpdateSpells();
+    }
 
 
 
@@ -55,3 +57,12 @@ Vector2 Hero::GetHealthBarPosition() {
     out.x -= 70.0f;
     return out;
 }
+
+float Hero::GetTotalAttackSpeed() {
+    return this->unitInfo->baseAttackSpeed * this->attackSpeedMult;
+}
+
+float Hero::DistanceToHero(Hero hero) {
+    return sqrt(powf((this->position.x - hero.position.x), 2) + powf((this->position.y - hero.position.y), 2));
+}
+

@@ -65,6 +65,18 @@
     <ClCompile Include="ModuleManager.cpp">
       <Filter>Game\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="Minion.cpp">
+      <Filter>Game\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InputController.cpp">
+      <Filter>Game\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderBase.h">
+      <Filter>Game\Controller\Orders</Filter>
+    </ClCompile>
+    <ClCompile Include="OrbWalker.cpp">
+      <Filter>Modules\OrbWalker</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Memory">
@@ -102,6 +114,15 @@
     </Filter>
     <Filter Include="Game\GameData">
       <UniqueIdentifier>{698db342-2d8b-46a9-9ad2-b80726d9eb7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Controller">
+      <UniqueIdentifier>{5803d9de-28e2-4ba1-8744-5e96d5ae4847}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Controller\Orders">
+      <UniqueIdentifier>{8dada7e6-10ae-413b-8453-8dcc2cc57263}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\OrbWalker">
+      <UniqueIdentifier>{2bd0c62c-9088-451f-9fcb-83c260543d51}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +206,27 @@
     </ClInclude>
     <ClInclude Include="ModuleManager.h">
       <Filter>Game\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Minion.h">
+      <Filter>Game\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InputController.h">
+      <Filter>Game\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeoutOrder.h">
+      <Filter>Game\Controller\Orders</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseMoveOrder.h">
+      <Filter>Game\Controller\Orders</Filter>
+    </ClInclude>
+    <ClInclude Include="RightClickOrder.h">
+      <Filter>Game\Controller\Orders</Filter>
+    </ClInclude>
+    <ClInclude Include="OrbWalker.h">
+      <Filter>Modules\OrbWalker</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockInputOrder.h">
+      <Filter>Game\Controller\Orders</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

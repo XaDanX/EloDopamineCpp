@@ -9,6 +9,7 @@
 
 void EloDopamine::OnUpdate() {
     moduleManager->UpdateModules();
+    inputController->Update();
 }
 
 void EloDopamine::OnGui() {
@@ -18,6 +19,8 @@ void EloDopamine::OnGui() {
 
 
 void EloDopamine::Update() {
+
+    auto timeBegin = std::chrono::high_resolution_clock::now();
     if (GetAsyncKeyState(VK_INSERT) & 1) {
         this->isGuiOpen = !this->isGuiOpen;
         this->overlay->ToggleTransparent();
@@ -33,6 +36,10 @@ void EloDopamine::Update() {
     if (this->isGuiOpen) {
         this->OnGui();
     }
+    ImGui::Begin("uwu");
+    std::chrono::duration<float, std::milli> dur = std::chrono::high_resolution_clock::now() - timeBegin;
+    ImGui::Text("Cycle: %f ms", (float)dur.count());
+    ImGui::End();
 
     this->overlay->RenderFrame(); 
 

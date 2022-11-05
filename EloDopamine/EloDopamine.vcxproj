@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="GameData.cpp" />
+    <ClCompile Include="InputController.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="EloDopamine.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -33,16 +34,20 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
+    <ClCompile Include="Minion.cpp" />
     <ClCompile Include="ModuleManager.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="ObjectView.cpp" />
     <ClCompile Include="Offsets.cpp" />
+    <ClCompile Include="OrbWalker.cpp" />
+    <ClCompile Include="OrderBase.h" />
     <ClCompile Include="Overlay.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="UnitInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BlockInputOrder.h" />
     <ClInclude Include="EloDopamine.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="GameData.h" />
@@ -56,18 +61,24 @@
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
+    <ClInclude Include="InputController.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="MemoryManager.h" />
+    <ClInclude Include="Minion.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleManager.h" />
+    <ClInclude Include="MouseMoveOrder.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="ObjectView.h" />
     <ClInclude Include="Offsets.h" />
+    <ClInclude Include="OrbWalker.h" />
     <ClInclude Include="Overlay.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RightClickOrder.h" />
     <ClInclude Include="Spell.h" />
     <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="TimeoutOrder.h" />
     <ClInclude Include="UnitInfo.h" />
     <ClInclude Include="XorStr.h" />
   </ItemGroup>

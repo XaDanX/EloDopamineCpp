@@ -12,6 +12,7 @@ private:
     int spellBookPointers[6];
 public:
     std::string championName;
+    float attackSpeedMult;
 
     Spell Q_SPELL = Spell();
     Spell W_SPELL = Spell();
@@ -24,5 +25,9 @@ public:
     void UpdateSpells();
 
     Vector2 GetHealthBarPosition();
+
+    float GetTotalAttackSpeed();
+
+    float DistanceToHero(Hero hero);
 
 };

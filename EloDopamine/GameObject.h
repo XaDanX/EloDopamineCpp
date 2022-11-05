@@ -55,7 +55,7 @@ public:
     UnitInfo* unitInfo;
 
 
-    virtual bool Load(unsigned int address, bool deepLoad);
+    virtual bool Load(unsigned int address, bool deepLoad) = 0;
 
     bool CanAttack();
     bool CanMove();

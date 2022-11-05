@@ -32,6 +32,7 @@ public:
     std::string ReadString(DWORD address);
     std::string ReadStringSized(DWORD address, int size);
     std::vector<int> ReadTemplate(int address);
+    std::vector<int> ReadTemplateSized(int address, int size);
     HWND GetWindowHandle();
 
 

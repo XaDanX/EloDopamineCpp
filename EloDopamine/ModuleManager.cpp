@@ -9,7 +9,7 @@ void ModuleManager::RegisterModule(ModuleBase* module) {
 			logger->Info("Script loaded: %s | For champion: %s", module->GetName().c_str(), module->ModuleType().c_str());
 		}
 		else {
-			delete module; // delete from heap to avoid memory usage from unused modules
+			delete module; 
 		}
 	}
 	else {
@@ -22,7 +22,8 @@ void ModuleManager::RegisterModules() {
 	/*
 		Append all modules here
 	*/
-	this->RegisterModule(new ObjectView());
+	//this->RegisterModule(new ObjectView());
+	this->RegisterModule(new OrbWalker());
 }
 
 void ModuleManager::Initialize() {

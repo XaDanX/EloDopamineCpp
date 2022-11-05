@@ -6,6 +6,7 @@
 #include "Logger.h"
 #include "ObjectView.h"
 #include "ObjectManager.h"
+#include "OrbWalker.h"
 
 
 class ModuleManager {

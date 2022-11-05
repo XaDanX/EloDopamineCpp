@@ -100,6 +100,18 @@ std::vector<int> MemoryManager::ReadTemplate(int address) {
     return pointerList;
 }
 
+std::vector<int> MemoryManager::ReadTemplateSized(int address, int size) {
+    int template_array = memoryManager->Read<int>(address + 0x4);
+    std::vector<int> pointerList;
+    for (int index = 0; index < size; index++) {
+        int objectPointer = memoryManager->Read<int>(template_array + (index * 4));
+        pointerList.emplace_back(objectPointer);
+    }
+
+
+    return pointerList;
+}
+
 HWND MemoryManager::GetWindowHandle() {
     return this->hWindow;
 }

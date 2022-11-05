@@ -2,6 +2,7 @@
 #include "Overlay.h"
 #include "ObjectManager.h"
 #include "Engine.h"
+#include "InputController.h"
 
 namespace {
 	std::string deployablePath("C:\\Deployable");

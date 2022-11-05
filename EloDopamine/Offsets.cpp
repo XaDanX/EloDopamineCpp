@@ -14,7 +14,7 @@ int Offsets::ObjectManager = 0x188FD7C; //89 ? ? ? ? ? 57 C7 06 ? ? ? ? 66 C7 46
 int Offsets::Renderer = 0x3187448; //8B 0D ? ? ? ? 50 E8 ? ? ? ? 5E 8B // A1 ?? ?? ?? ?? 56 57 BF ?? ?? ?? ?? 8B
 //== LISTS ==//
 int	Offsets::MissileInterface = 0x312D904; //8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B 30 8B 36
-int	Offsets::MinionInterface = 0x24DD710; //8B 0D ? ? ? ? E8 ? ? ? ? EB 09 // A3 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 C4 04 85 C0 74 32
+int	Offsets::MinionInterface = 0x25095CC; //8B 0D ? ? ? ? E8 ? ? ? ? EB 09 // A3 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 C4 04 85 C0 74 32
 int	Offsets::TurretInterface = 0x3124C1C; //8B 35 ? ? ? ? 8B 76 18 // 8D 44 24 0C 89 35 ? ? ? ? // A1 ? ? ? ? 53 56 8B 70 04
 int	Offsets::InhibitorInterface = 0x313D514; //A1 ?? ?? ?? ?? 53 55 56 8B 70 04 8B 40 08
 int	Offsets::HeroInterface = 0x18BBF40; //89 44 24 18 A1 ? ? ? ? 53 // 8B 15 ? ? ? ? 0F 44 C1
@@ -147,7 +147,7 @@ int	Offsets::ObjSpellBOK2 = 0x2508; //ObjSpellBOOK+0x20
 int	Offsets::ObjTRANSFORMATION = 0x3040;
 int	Offsets::ObjName = 0x2DA4;
 int	Offsets::ObjLVL = 0x3584; // ó 0x353C
-int	Offsets::ObjSIZEMULTIPLIER = 0x136C;
+int	Offsets::ObjSIZEMULTIPLIER = 0x1350;
 int	Offsets::ObjEXPIRY = 0x298;
 int	Offsets::ObjCritMOD = ObjBaseATK + 0x10;
 int	Offsets::ObjCrit = ObjCritMOD + 0x10;
