@@ -4,6 +4,11 @@
 #include "ObjectManager.h"
 #include "imgui/imgui.h"
 
+namespace OrbWalkerOptions {
+	bool enabled = false;
+	float ping = 50.0;
+}
+
 namespace OrbWalkerUtils {
 
 	float lastAutoAttackTick = 0;
@@ -17,7 +22,7 @@ namespace OrbWalkerUtils {
 	}
 
 	bool CanAttack() {
-		return lastAutoAttackTick + GetAttackDelay() + 50.0 / 2 < GetTickCount64(); // 50 is a ping
+		return lastAutoAttackTick + GetAttackDelay() + OrbWalkerOptions::ping / 2 < GetTickCount64();
 	}
 
 	bool CanMove() {
@@ -48,7 +53,7 @@ namespace OrbWalkerUtils {
 
 
 void OrbWalker::OnUpdate() {
-
+	if (!OrbWalkerOptions::enabled) return;
 	ImDrawList* canvas = ImGui::GetBackgroundDrawList();
 
 	auto target = OrbWalkerUtils::GetTargetTest();
@@ -76,7 +81,9 @@ void OrbWalker::OnUpdate() {
 
 void OrbWalker::OnGui() {
 	ImGui::Begin("Orbwalker++");
-	ImGui::Text("Test");
+	ImGui::Checkbox("Enabled", &OrbWalkerOptions::enabled);
+	ImGui::Separator();
+	ImGui::SliderFloat("Ping", &OrbWalkerOptions::ping, 5, 200);
 	ImGui::End();
 }
 

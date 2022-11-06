@@ -22,7 +22,6 @@ void ModuleManager::RegisterModules() {
 	/*
 		Append all modules here
 	*/
-	//this->RegisterModule(new ObjectView());
 	this->RegisterModule(new OrbWalker());
 }
 
