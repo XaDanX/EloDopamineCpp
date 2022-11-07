@@ -7,7 +7,9 @@
 #include "GameData.h"
 #include <thread>
 #include <iostream>
-
+#include "TextureManager.h"
+#include <filesystem>
+namespace fs = std::filesystem;
 
 void EloDopamine::OnUpdate() {
     moduleManager->UpdateModules();
@@ -36,9 +38,20 @@ void EloDopamine::Update() {
     if (this->isGuiOpen) {
         this->OnGui();
     }
-    ImGui::Begin("uwu");
+
     std::chrono::duration<float, std::milli> dur = std::chrono::high_resolution_clock::now() - timeBegin;
-    ImGui::Text("Cycle: %f ms", (float)dur.count());
+
+    ImGui::SetNextWindowSize({ 231.f,109.f });
+
+    ImGui::Begin("Permashow", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+
+    ImGui::SetCursorPos({ 7.f,28.f });
+    ImGui::PushItemWidth(119.000000);
+    ImGui::Text("Update: %f ms", (float)dur.count());
+    ImGui::PopItemWidth();
+    ImGui::SetCursorPos({ 7.f,52.f });
+    ImGui::PushItemWidth(119.000000);
+    ImGui::PopItemWidth();
     ImGui::End();
 
     this->overlay->RenderFrame(); 
@@ -58,7 +71,6 @@ void EloDopamine::Initialize() {
     }
 
 
-
     SetActiveWindow(memoryManager->GetWindowHandle());
 	this->overlay = new Overlay();
 	this->overlay->Init();
@@ -66,8 +78,20 @@ void EloDopamine::Initialize() {
     
     gameData->Load(deployablePath);
 
+
+
+
     logger->Info("Initializing modules..");
     engine->Update();
+    objectManager->Update();
+
+    /*
+    logger->Info("Loading resources..");
+    std::string path = "C:\\Deployable\\icons_spells";
+    for (const auto& entry : fs::directory_iterator(path)) {
+        textureManager->LoadTexture(entry.path().stem().string(), entry.path().string().c_str());
+    }*/
+    
 
     std::thread engineUpdateThread = engine->spawn();
     std::thread inputUpdateThread = inputController->spawn();

@@ -22,6 +22,7 @@ public:
 
 	void Update();
 	bool IsReady();
+	int Cooldown();
 
 };
 

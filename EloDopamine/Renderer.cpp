@@ -23,3 +23,7 @@ void Renderer::DrawCircleAt(const Vector3& worldPos, float radius, bool filled, 
 	else
 		canvas->AddPolyline(points, numPoints, color, true, thickness);
 }
+
+ImDrawList* Renderer::GetDrawList() {
+	return ImGui::GetBackgroundDrawList();
+}

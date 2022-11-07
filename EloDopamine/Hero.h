@@ -13,6 +13,7 @@ private:
 public:
     std::string championName;
     float attackSpeedMult;
+    bool isAlive;
 
     Spell Q_SPELL = Spell();
     Spell W_SPELL = Spell();
@@ -29,5 +30,8 @@ public:
     float GetTotalAttackSpeed();
 
     float DistanceToHero(Hero hero);
+
+    bool IsValidTarget();
+
 
 };

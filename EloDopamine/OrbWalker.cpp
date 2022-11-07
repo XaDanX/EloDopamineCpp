@@ -3,6 +3,7 @@
 #include "InputController.h"
 #include "ObjectManager.h"
 #include "imgui/imgui.h"
+#include "Renderer.h"
 
 namespace OrbWalkerOptions {
 	bool enabled = false;
@@ -29,15 +30,13 @@ namespace OrbWalkerUtils {
 		return lastMoveTick < GetTickCount64();
 	}
 
-	Hero& GetTargetTest() {
+	Hero& GetClosestTarget() {
 		float old_distance = FLT_MAX;
 		Vector3 localPlayerPos = objectManager->GetLocalPlayer().position;
 		Hero target = objectManager->GetLocalPlayer();
 
 		for (auto hero : objectManager->GetHeroList()) {
-			if (hero.address == objectManager->GetLocalPlayer().address) continue;
-			if (hero.visible == false) continue;
-			if (hero.team == objectManager->GetLocalPlayer().team) continue;
+			if (!hero.IsValidTarget()) continue;
 			auto distance = objectManager->GetLocalPlayer().DistanceToHero(hero);
 			if (distance < old_distance) {
 				old_distance = distance;
@@ -56,14 +55,14 @@ void OrbWalker::OnUpdate() {
 	if (!OrbWalkerOptions::enabled) return;
 	ImDrawList* canvas = ImGui::GetBackgroundDrawList();
 
-	auto target = OrbWalkerUtils::GetTargetTest();
+	auto target = OrbWalkerUtils::GetClosestTarget();
 
 	auto player_w = engine->WorldToScreen(objectManager->GetLocalPlayer().position);
 	auto target_w = engine->WorldToScreen(target.position);
 
 	canvas->AddLine(ImVec2(player_w.x, player_w.y), ImVec2(target_w.x, target_w.y), ImColor(255, 255, 255, 150), 2);
 
-	if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
+	if (GetAsyncKeyState(0x4E) & 0x8000) {
 		if (target.address != objectManager->GetLocalPlayer().address) {
 			if (OrbWalkerUtils::CanAttack()) {
 				inputController->IssueClickAt(target_w.x, target_w.y);
@@ -80,11 +79,9 @@ void OrbWalker::OnUpdate() {
 }
 
 void OrbWalker::OnGui() {
-	ImGui::Begin("Orbwalker++");
 	ImGui::Checkbox("Enabled", &OrbWalkerOptions::enabled);
 	ImGui::Separator();
 	ImGui::SliderFloat("Ping", &OrbWalkerOptions::ping, 5, 200);
-	ImGui::End();
 }
 
 std::string OrbWalker::ModuleType() {

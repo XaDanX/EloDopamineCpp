@@ -1,5 +1,5 @@
 #include "ModuleManager.h"
-
+#include "imgui/imgui.h"
 
 void ModuleManager::RegisterModule(ModuleBase* module) {
 
@@ -23,6 +23,7 @@ void ModuleManager::RegisterModules() {
 		Append all modules here
 	*/
 	this->RegisterModule(new OrbWalker());
+	this->RegisterModule(new SpellTracker());
 }
 
 void ModuleManager::Initialize() {
@@ -37,6 +38,10 @@ void ModuleManager::UpdateModules() {
 
 void ModuleManager::UpdateModulesGui() {
 	for (auto& currentModule : this->moduleList) {
-		currentModule->OnGui();
+		if (ImGui::CollapsingHeader(currentModule->GetName().c_str())) {
+			ImGui::BeginChild("##UWU");
+			currentModule->OnGui();
+			ImGui::EndChild();
+		}
 	}
 }

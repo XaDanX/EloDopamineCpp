@@ -18,3 +18,12 @@ void Spell::Update() {
 bool Spell::IsReady() {
 	return (engine->GameTime() - this->readyAt) > 0;
 }
+
+int Spell::Cooldown() {
+	auto time = (this->readyAt - engine->GameTime());
+	if (time > 0) {
+		return time;
+	} else {
+		return 0;
+	}
+}

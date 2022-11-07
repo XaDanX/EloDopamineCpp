@@ -7,6 +7,7 @@
 #include "ObjectView.h"
 #include "ObjectManager.h"
 #include "OrbWalker.h"
+#include "SpellTracker.h"
 
 
 class ModuleManager {

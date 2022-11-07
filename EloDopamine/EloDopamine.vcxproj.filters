@@ -77,6 +77,12 @@
     <ClCompile Include="OrbWalker.cpp">
       <Filter>Modules\OrbWalker</Filter>
     </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Game\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellTracker.cpp">
+      <Filter>Modules\SpellTracker</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Memory">
@@ -123,6 +129,9 @@
     </Filter>
     <Filter Include="Modules\OrbWalker">
       <UniqueIdentifier>{2bd0c62c-9088-451f-9fcb-83c260543d51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\SpellTracker">
+      <UniqueIdentifier>{98192cc2-b0e1-48bc-a014-30ca97dd40bb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +236,15 @@
     </ClInclude>
     <ClInclude Include="BlockInputOrder.h">
       <Filter>Game\Controller\Orders</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Game\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SpellTracker.h">
+      <Filter>Modules\SpellTracker</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 #include "Hero.h"
+#include "ObjectManager.h"
 bool Hero::Load(unsigned int address, bool deepLoad) {
     this->address = address;
     memoryManager->ReadBuffer(address, this->buff, Hero::objectSize);
@@ -14,6 +15,13 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
     memcpy(&actionState, &buff[Offsets::ObjActionState], sizeof(uint16_t));
     memcpy(&spellBookPointers, &buff[Offsets::ObjSpellBOOK], sizeof(int) * 6);
     memcpy(&attackSpeedMult, &buff[Offsets::ObjATKSpeedMulti], sizeof(float));
+    bool alive;
+    memcpy(&alive, &buff[Offsets::ObjDead], sizeof(BYTE));
+    if (alive % 2 == 0) {
+        this->isAlive = true;
+    } else {
+        this->isAlive = false;
+    }
 
     if (championName.empty()) {
         championName = memoryManager->ReadString(this->address + Offsets::ObjName);
@@ -23,15 +31,13 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
         this->unitInfo = gameData->GetUnitInfoByName(this->championName);
    
 
-    if (this->visible) {
-        this->Q_SPELL.address = this->spellBookPointers[0];
-        this->W_SPELL.address = this->spellBookPointers[1];
-        this->E_SPELL.address = this->spellBookPointers[2];
-        this->R_SPELL.address = this->spellBookPointers[3];
-        this->D_SPELL.address = this->spellBookPointers[4];
-        this->F_SPELL.address = this->spellBookPointers[5];
-        this->UpdateSpells();
-    }
+    this->Q_SPELL.address = this->spellBookPointers[0];
+    this->W_SPELL.address = this->spellBookPointers[1];
+    this->E_SPELL.address = this->spellBookPointers[2];
+    this->R_SPELL.address = this->spellBookPointers[3];
+    this->D_SPELL.address = this->spellBookPointers[4];
+    this->F_SPELL.address = this->spellBookPointers[5];
+    this->UpdateSpells();
 
 
 
@@ -64,5 +70,13 @@ float Hero::GetTotalAttackSpeed() {
 
 float Hero::DistanceToHero(Hero hero) {
     return sqrt(powf((this->position.x - hero.position.x), 2) + powf((this->position.y - hero.position.y), 2) + powf((this->position.z - hero.position.z), 2));
+}
+
+bool Hero::IsValidTarget() {
+    if (this->address == objectManager->GetLocalPlayer().address) return false;
+    if (!this->visible) return false;
+    if (!this->team == objectManager->GetLocalPlayer().team) return false;
+    if (!this->isAlive) return false;
+    return true;
 }
 

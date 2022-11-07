@@ -36,6 +36,7 @@ public:
 
 	static ID3D11Device* GetDxDevice();
 
+
 private:
 
 	static bool    CreateDeviceD3D(HWND hWnd);
@@ -43,6 +44,8 @@ private:
 	static void    CreateRenderTarget();
 	static void    CleanupRenderTarget();
 	static LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+	void SetupStyle();
 
 
 private:
