@@ -47,6 +47,7 @@ public:
     static int OMissileDestIdx;
     static int OMissileStartPos;
     static int OMissileEndPos;
+    static int OMissileCurrentPos;
     static int OSpellInfoSlot;
     static int OSpellInfoData;
     static int OSpellInfoStartTime;
@@ -72,7 +73,7 @@ public:
     static int AIManagerNavGrid;
     static int AIManagerCurrentSegment;
     static int SpellSlotLevel;
-    
+
     static int SpellInfoSpellName;
 
     static int SpellSlotTime;

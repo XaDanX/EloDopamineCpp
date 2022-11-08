@@ -30,6 +30,6 @@ public:
 	std::thread spawn() {
 		return std::thread([this] { this->UpdateLoopThread(); });
 	}
-	
+
 };
 inline extern std::unique_ptr<InputController> inputController = std::make_unique<InputController>();

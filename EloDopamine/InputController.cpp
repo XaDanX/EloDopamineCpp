@@ -49,16 +49,11 @@ void InputController::RightClickUp() {
 
 
 void InputController::Update() {
-	while (true) {
-		if (this->orderQueue.empty())
-			return;
-		auto& current = this->orderQueue.front();
-		if (current->Execute()) {
-			this->orderQueue.pop();
-		}
-		else {
-			return;
-		}
+	if (this->orderQueue.empty())
+		return;
+	auto& current = this->orderQueue.front();
+	if (current->Execute()) {
+		this->orderQueue.pop();
 	}
 }
 
@@ -69,7 +64,7 @@ void InputController::IssueClickAt(int x, int y) {
 	this->orderQueue.emplace(new BlockInputOrder(true));
 	this->orderQueue.emplace(new MouseMoveOrder(x, y));
 	this->orderQueue.emplace(new RightClickOrder(0));
-	this->orderQueue.emplace(new TimeoutOrder(0));
+	this->orderQueue.emplace(new TimeoutOrder(12));
 	this->orderQueue.emplace(new RightClickOrder(1));
 	this->orderQueue.emplace(new MouseMoveOrder(lastPos.x, lastPos.y));
 	this->orderQueue.emplace(new BlockInputOrder(false));
@@ -78,6 +73,7 @@ void InputController::IssueClickAt(int x, int y) {
 
 void InputController::IssueClick() {
 	this->orderQueue.emplace(new RightClickOrder(0));
+	this->orderQueue.emplace(new TimeoutOrder(12));
 	this->orderQueue.emplace(new RightClickOrder(1));
 }
 
@@ -90,6 +86,5 @@ Vector2 InputController::GetCursorPosition() {
 void InputController::UpdateLoopThread() {
 	while (true) {
 		this->Update();
-		std::this_thread::sleep_for(200ns);
 	}
 }

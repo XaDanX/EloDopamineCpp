@@ -68,10 +68,12 @@ void OrbWalker::OnUpdate() {
 				inputController->IssueClickAt(target_w.x, target_w.y);
 				OrbWalkerUtils::lastAutoAttackTick = GetTickCount64();
 				OrbWalkerUtils::lastMoveTick = GetTickCount64() + OrbWalkerUtils::GetWindupTime();
+				return;
 			}
 			if (OrbWalkerUtils::CanMove()) {
 				inputController->IssueClick();
 				OrbWalkerUtils::lastMoveTick = GetTickCount64() + 60;
+				return;
 			}
 		}
 
