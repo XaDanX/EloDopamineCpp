@@ -1,11 +1,12 @@
 #include "Hero.h"
 #include "ObjectManager.h"
 bool Hero::Load(unsigned int address, bool deepLoad) {
-    this->address = address;
-    memoryManager->ReadBuffer(address, this->buff, Hero::objectSize);
+    if (!this->address)
+        this->address = address;
+    memoryManager->ReadBuffer(this->address, this->buff, Hero::objectSize);
 
     memcpy(&index, &buff[Offsets::ObjIndex], sizeof(byte));
-    memcpy(&team, &buff[Offsets::ObjTeam], sizeof(int));
+    memcpy(&team, &buff[Offsets::ObjTeam], sizeof(short));
     memcpy(&health, &buff[Offsets::ObjHealth], sizeof(float));
     memcpy(&maxHealth, &buff[Offsets::ObjMaxHealth], sizeof(float));
     memcpy(&attackRange, &buff[Offsets::ObjATKRange], sizeof(float));
@@ -38,8 +39,6 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
     this->D_SPELL.address = this->spellBookPointers[4];
     this->F_SPELL.address = this->spellBookPointers[5];
     this->UpdateSpells();
-
-
 
     return true;
 }
@@ -75,7 +74,14 @@ float Hero::DistanceToHero(Hero hero) {
 bool Hero::IsValidTarget() {
     if (this->address == objectManager->GetLocalPlayer().address) return false;
     if (!this->visible) return false;
-    if (!this->team == objectManager->GetLocalPlayer().team) return false;
+    if (this->team == objectManager->GetLocalPlayer().team) return false;
+    if (!this->isAlive) return false;
+    return true;
+}
+
+bool Hero::IsValidEntity() {
+    if (this->address == objectManager->GetLocalPlayer().address) return false;
+    if (!this->visible) return false;
     if (!this->isAlive) return false;
     return true;
 }

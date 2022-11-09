@@ -157,8 +157,9 @@ void Overlay::Init() {
 	io.ConfigWindowsMoveFromTitleBarOnly = true;
 
 
-	io.Fonts->AddFontFromFileTTF("C:\\Deployable\\Font.ttf", 15.0f);
+	io.Fonts->AddFontFromFileTTF("C:\\Deployable\\Font.ttf", 16.0f);
 	Fonts::font11 = io.Fonts->AddFontFromFileTTF("C:\\Deployable\\Font.ttf", 11.0f);
+	Fonts::font19 = io.Fonts->AddFontFromFileTTF("C:\\Deployable\\Font.ttf", 22.0f);
 	this->SetupStyle();
 
 

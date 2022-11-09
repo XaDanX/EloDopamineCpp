@@ -10,11 +10,11 @@ private:
     std::vector<Hero> heroList;
 
     std::vector<Minion> allyMinionList;
-    std::vector<Minion> enemyMininList;
+    std::vector<Minion> enemyMinionList;
     std::vector<Minion> minionList;
 
-    int heroListPtr;
-    int minionListPtr;
+    int heroListPtr = 0;
+    int minionListPtr = 0;
 
     int localPlayerPointer{ 0 };
     Hero localPlayer;

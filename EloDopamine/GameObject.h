@@ -43,14 +43,14 @@ public:
     int index{};
     float health{};
     float maxHealth{};
-    Team team{};
+    short team{};
     float attackRange{};
     bool targetable{};
     bool visible{};
     Vector3 position{};
     int actionState{};
 
-    unsigned int address{};
+    unsigned int address{0};
 
     UnitInfo* unitInfo;
 

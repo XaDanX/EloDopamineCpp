@@ -36,12 +36,14 @@ void EloDopamine::Update() {
     this->OnUpdate();
 
     if (this->isGuiOpen) {
+        ImGui::Begin("EloDopamine");
         this->OnGui();
+        ImGui::End();
     }
 
     std::chrono::duration<float, std::milli> dur = std::chrono::high_resolution_clock::now() - timeBegin;
 
-    ImGui::SetNextWindowSize({ 231.f,109.f });
+    ImGui::SetNextWindowSize({ 231.f ,109.f / 2});
 
     ImGui::Begin("Permashow", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 
@@ -49,9 +51,11 @@ void EloDopamine::Update() {
     ImGui::PushItemWidth(119.000000);
     ImGui::Text("Update: %f ms", (float)dur.count());
     ImGui::PopItemWidth();
+    /*
     ImGui::SetCursorPos({ 7.f,52.f });
     ImGui::PushItemWidth(119.000000);
     ImGui::PopItemWidth();
+    */
     ImGui::End();
 
     this->overlay->RenderFrame(); 

@@ -8,6 +8,7 @@
 namespace OrbWalkerOptions {
 	bool enabled = false;
 	float ping = 50.0;
+	int hotKey = 0x4E;
 }
 
 namespace OrbWalkerUtils {
@@ -62,7 +63,7 @@ void OrbWalker::OnUpdate() {
 
 	canvas->AddLine(ImVec2(player_w.x, player_w.y), ImVec2(target_w.x, target_w.y), ImColor(255, 255, 255, 150), 2);
 
-	if (GetAsyncKeyState(0x4E) & 0x8000) {
+	if (GetAsyncKeyState(OrbWalkerOptions::hotKey) & 0x8000) {
 		if (target.address != objectManager->GetLocalPlayer().address) {
 			if (OrbWalkerUtils::CanAttack()) {
 				inputController->IssueClickAt(target_w.x, target_w.y);
@@ -84,6 +85,11 @@ void OrbWalker::OnGui() {
 	ImGui::Checkbox("Enabled", &OrbWalkerOptions::enabled);
 	ImGui::Separator();
 	ImGui::SliderFloat("Ping", &OrbWalkerOptions::ping, 5, 200);
+	ImGui::PushFont(Fonts::font19);
+	ImGui::TextColored(ImColor(252, 218, 0, 255), "OrbWalker key");
+	ImGui::PopFont();
+	ImGui::SameLine();
+	renderer->CustomGuiHotkey(&OrbWalkerOptions::hotKey);
 }
 
 std::string OrbWalker::ModuleType() {

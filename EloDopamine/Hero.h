@@ -29,9 +29,10 @@ public:
 
     float GetTotalAttackSpeed();
 
-    float DistanceToHero(Hero hero);
+    float DistanceToHero(Hero hero); 
 
     bool IsValidTarget();
+    bool IsValidEntity();
 
 
 };

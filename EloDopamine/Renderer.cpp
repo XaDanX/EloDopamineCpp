@@ -1,5 +1,5 @@
 #include "Renderer.h"
-
+#include "KeyCodes.h"
 void Renderer::DrawCircleAt(const Vector3& worldPos, float radius, bool filled, int numPoints, ImColor color, float thickness) const {
 	if (numPoints >= 200)
 		return;
@@ -26,4 +26,25 @@ void Renderer::DrawCircleAt(const Vector3& worldPos, float radius, bool filled, 
 
 ImDrawList* Renderer::GetDrawList() {
 	return ImGui::GetBackgroundDrawList();
+}
+
+bool Renderer::CustomGuiHotkey(int* k, const ImVec2& size_arg) {
+	
+	static bool waitingforkey = false;
+	if (waitingforkey == false) {
+		if (ImGui::Button(KeyNames[*(int*)k], size_arg))
+			waitingforkey = true;
+	}
+	else if (waitingforkey == true) {
+		ImGui::Button("...", size_arg);
+		for (auto& Key : KeyCodes)
+		{
+			if (GetAsyncKeyState(Key) & 0x8000) {
+				*(int*)k = Key;
+				waitingforkey = false;
+			}
+		}
+	}
+	return true;
+		
 }

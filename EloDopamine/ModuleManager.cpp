@@ -39,7 +39,7 @@ void ModuleManager::UpdateModules() {
 void ModuleManager::UpdateModulesGui() {
 	for (auto& currentModule : this->moduleList) {
 		if (ImGui::CollapsingHeader(currentModule->GetName().c_str())) {
-			ImGui::BeginChild("##UWU");
+			ImGui::BeginChild(currentModule->GetName().c_str());
 			currentModule->OnGui();
 			ImGui::EndChild();
 		}
