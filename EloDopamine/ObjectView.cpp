@@ -57,3 +57,11 @@ std::string ObjectView::ModuleType()
 std::string ObjectView::GetName() {
 	return "ObjectView";
 }
+
+void ObjectView::OnInitialize()
+{
+}
+
+void ObjectView::OnExit()
+{
+}

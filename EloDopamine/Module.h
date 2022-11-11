@@ -9,6 +9,10 @@ public:
 
 	virtual void OnUpdate() = 0;
 
+	virtual void OnInitialize() = 0;
+
+	virtual void OnExit() = 0;
+
 	virtual void OnGui() = 0;
 
 	virtual std::string ModuleType() = 0; // champion name/utility

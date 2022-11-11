@@ -83,6 +83,18 @@
     <ClCompile Include="Minion.cpp">
       <Filter>Game\GameObjects\Minion</Filter>
     </ClCompile>
+    <ClCompile Include="Avareness.cpp">
+      <Filter>Modules\Avareness</Filter>
+    </ClCompile>
+    <ClCompile Include="AiManager.cpp">
+      <Filter>Game\GameObjects\Hero\AiManager</Filter>
+    </ClCompile>
+    <ClCompile Include="BuffManager.cpp">
+      <Filter>Game\GameObjects\Hero\BuffManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Buff.cpp">
+      <Filter>Game\GameObjects\Hero\BuffManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Memory">
@@ -141,6 +153,15 @@
     </Filter>
     <Filter Include="Game\GameObjects\Minion">
       <UniqueIdentifier>{57c4a000-9269-45ec-8d96-42366bfb9769}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObjects\Hero\AiManager">
+      <UniqueIdentifier>{49b61b6e-bd32-4881-be12-8d2ddbc58933}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Avareness">
+      <UniqueIdentifier>{afd6e3bb-daf4-43a4-a135-232f1fdf5a6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObjects\Hero\BuffManager">
+      <UniqueIdentifier>{8632ddb6-b0be-4986-b225-b10e99174216}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -257,6 +278,18 @@
     </ClInclude>
     <ClInclude Include="KeyCodes.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Avareness.h">
+      <Filter>Modules\Avareness</Filter>
+    </ClInclude>
+    <ClInclude Include="AiManager.h">
+      <Filter>Game\GameObjects\Hero\AiManager</Filter>
+    </ClInclude>
+    <ClInclude Include="BuffManager.h">
+      <Filter>Game\GameObjects\Hero\BuffManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Buff.h">
+      <Filter>Game\GameObjects\Hero\BuffManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

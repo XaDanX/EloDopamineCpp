@@ -31,32 +31,35 @@ namespace OrbWalkerUtils {
 		return lastMoveTick < GetTickCount64();
 	}
 
-	Hero& GetClosestTarget() {
-		float old_distance = FLT_MAX;
-		Vector3 localPlayerPos = objectManager->GetLocalPlayer().position;
-		Hero target = objectManager->GetLocalPlayer();
+	Hero& GetBestTarget() {
+		float oldDistance = FLT_MAX;
+		Hero bestTarget = objectManager->GetLocalPlayer();
+		for (auto& unit : objectManager->GetHeroList())
+		{
+			if (!unit.IsValidTarget()) continue;
 
-		for (auto hero : objectManager->GetHeroList()) {
-			if (!hero.IsValidTarget()) continue;
-			auto distance = objectManager->GetLocalPlayer().DistanceToHero(hero);
-			if (distance < old_distance) {
-				old_distance = distance;
-				target = hero;
+			if (!unit.targetable) continue;
+
+			if (unit.DistanceToHero(objectManager->GetLocalPlayer()) - unit.GetUnitInfo()->gameplayRadius > (objectManager->GetLocalPlayer().attackRange + objectManager->GetLocalPlayer().GetUnitInfo()->gameplayRadius)) continue;
+
+			auto distance = objectManager->GetLocalPlayer().DistanceToHero(unit);
+
+			if (distance < oldDistance) {
+				oldDistance = distance;
+				bestTarget = unit;
 			}
 		}
-		return target;
-
-
-
+		return bestTarget;
 	}
 }
 
 
 void OrbWalker::OnUpdate() {
+
 	if (!OrbWalkerOptions::enabled) return;
 	ImDrawList* canvas = ImGui::GetBackgroundDrawList();
 
-	auto target = OrbWalkerUtils::GetClosestTarget();
+	auto target = OrbWalkerUtils::GetBestTarget();
 
 	auto player_w = engine->WorldToScreen(objectManager->GetLocalPlayer().position);
 	auto target_w = engine->WorldToScreen(target.position);
@@ -64,19 +67,20 @@ void OrbWalker::OnUpdate() {
 	canvas->AddLine(ImVec2(player_w.x, player_w.y), ImVec2(target_w.x, target_w.y), ImColor(255, 255, 255, 150), 2);
 
 	if (GetAsyncKeyState(OrbWalkerOptions::hotKey) & 0x8000) {
-		if (target.address != objectManager->GetLocalPlayer().address) {
+		if (!target.IsLocalPlayer() && target.IsValidTarget()) {
 			if (OrbWalkerUtils::CanAttack()) {
 				inputController->IssueClickAt(target_w.x, target_w.y);
 				OrbWalkerUtils::lastAutoAttackTick = GetTickCount64();
 				OrbWalkerUtils::lastMoveTick = GetTickCount64() + OrbWalkerUtils::GetWindupTime();
 				return;
 			}
-			if (OrbWalkerUtils::CanMove()) {
-				inputController->IssueClick();
-				OrbWalkerUtils::lastMoveTick = GetTickCount64() + 60;
-				return;
-			}
 		}
+		if (OrbWalkerUtils::CanMove()) {
+			inputController->IssueClick();
+			OrbWalkerUtils::lastMoveTick = GetTickCount64() + 60;
+			return;
+		}
+		
 
 	}
 }
@@ -97,5 +101,13 @@ std::string OrbWalker::ModuleType() {
 }
 
 std::string OrbWalker::GetName() {
-	return "OrbWalker++";
+	return "SpaceWalker++";
+}
+
+void OrbWalker::OnInitialize()
+{
+}
+
+void OrbWalker::OnExit()
+{
 }

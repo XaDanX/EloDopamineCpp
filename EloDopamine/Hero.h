@@ -6,6 +6,8 @@
 #include "Spell.h"
 #include "Engine.h"
 #include "GameData.h"
+#include "AiManager.h"
+#include "BuffManager.h"
 
 class Hero : public GameObject {
 private:
@@ -21,6 +23,10 @@ public:
     Spell R_SPELL = Spell();
     Spell D_SPELL = Spell();
     Spell F_SPELL = Spell();
+
+    AiManager aiManager = AiManager();
+    BuffManager buffManager = BuffManager();
+
 public:
     bool Load(unsigned int address, bool deepLoad);
     void UpdateSpells();
@@ -33,6 +39,9 @@ public:
 
     bool IsValidTarget();
     bool IsValidEntity();
+    bool IsLocalPlayer();
+
+    int ReadAiManager();
 
 
 };

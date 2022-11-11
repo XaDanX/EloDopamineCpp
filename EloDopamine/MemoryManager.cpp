@@ -77,9 +77,9 @@ std::string MemoryManager::ReadString(DWORD address) { // Ghetto as fuck but rio
 
 std::string MemoryManager::ReadStringSized(DWORD address, int size)
 {
-    char nameBuff[30];
-    memoryManager->ReadBuffer(address, nameBuff, size);
-    if (StringUtils::IsASCII(nameBuff, 30)) {
+    char nameBuff[150];
+    memoryManager->ReadBuffer(address, nameBuff, 150);
+    if (StringUtils::IsASCII(nameBuff, 150)) {
         return StringUtils::ToLower(std::string(nameBuff));
     }
     else {
