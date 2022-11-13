@@ -2,6 +2,7 @@
 #include "ObjectManager.h"
 #include "Engine.h"
 #include "Renderer.h"
+#include "XorStr.hpp"
 
 namespace AvarenessOptions {
 	auto enabled = true;
@@ -100,10 +101,10 @@ void Avareness::OnUpdate() {
 }
 
 void Avareness::OnGui() {
-	ImGui::Checkbox("Enabled", &AvarenessOptions::enabled);
+	ImGui::Checkbox(XorStr("Enabled").c_str(), &AvarenessOptions::enabled);
 	ImGui::Separator();
-	if (ImGui::CollapsingHeader("Ranges")) {
-		ImGui::Checkbox("Enabled", &AvarenessOptions::drawRanges);
+	if (ImGui::CollapsingHeader(XorStr("Ranges").c_str())) {
+		ImGui::Checkbox(XorStr("Enabled").c_str(), &AvarenessOptions::drawRanges);
 		ImGui::Separator();
 
 		ImGui::Checkbox("Ally Ranges", &AvarenessOptions::drawAllyRanges);

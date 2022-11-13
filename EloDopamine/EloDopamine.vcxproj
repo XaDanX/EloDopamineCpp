@@ -94,7 +94,7 @@
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TimeoutOrder.h" />
     <ClInclude Include="UnitInfo.h" />
-    <ClInclude Include="XorStr.h" />
+    <ClInclude Include="XorStr.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

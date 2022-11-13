@@ -163,6 +163,9 @@
     <Filter Include="Game\GameObjects\Hero\BuffManager">
       <UniqueIdentifier>{8632ddb6-b0be-4986-b225-b10e99174216}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Security">
+      <UniqueIdentifier>{fdfb33f8-d0d4-4af0-9e23-82ea7e99ccc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MemoryManager.h">
@@ -175,9 +178,6 @@
       <Filter>Game\Managers</Filter>
     </ClInclude>
     <ClInclude Include="StringUtils.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="XorStr.h">
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">
@@ -290,6 +290,9 @@
     </ClInclude>
     <ClInclude Include="Buff.h">
       <Filter>Game\GameObjects\Hero\BuffManager</Filter>
+    </ClInclude>
+    <ClInclude Include="XorStr.hpp">
+      <Filter>Security</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,8 @@
 #include "MemoryManager.h"
 #include "StringUtils.h"
+#pragma comment (lib, "ntdll.lib")
 
+EXTERN_C NTSTATUS NTAPI NtReadVirtualMemory(HANDLE, PVOID, PVOID, ULONG, PULONG);
 
 bool MemoryManager::Initialize() {
 
@@ -44,7 +46,8 @@ DWORD MemoryManager::BaseAddress() {
 
 void MemoryManager::ReadBuffer(DWORD addr, void* structure, int size) {
     SIZE_T bytesRead = 0;
-    ReadProcessMemory(this->hProcess, (DWORD*)addr, structure, size, &bytesRead);
+    //ReadProcessMemory(this->hProcess, (DWORD*)addr, structure, size, &bytesRead);
+    NtReadVirtualMemory(this->hProcess, (DWORD*)addr, structure, size, (PULONG)&bytesRead);
 }
 
 std::string MemoryManager::ReadString(DWORD address) { // Ghetto as fuck but riot uses std::string/charmaps randomly and i want one universal method to read them, it works XD
