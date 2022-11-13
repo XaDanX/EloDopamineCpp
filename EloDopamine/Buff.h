@@ -6,7 +6,7 @@
 class Buff {
 protected:
 protected:
-	static const SIZE_T buffSize = 0x200;
+	static const SIZE_T buffSize = 0x100;
 	BYTE buff[buffSize];
 public:
 	int address = 0;
@@ -18,6 +18,6 @@ public:
 	int count;
 	std::string name;
 
-	void Update(int address);
+	bool Update(int address);
 };
 
