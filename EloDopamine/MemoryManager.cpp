@@ -1,27 +1,28 @@
 #include "MemoryManager.h"
 #include "StringUtils.h"
+#include "XorStr.hpp"
 #pragma comment (lib, "ntdll.lib")
 
 EXTERN_C NTSTATUS NTAPI NtReadVirtualMemory(HANDLE, PVOID, PVOID, ULONG, PULONG);
 
 bool MemoryManager::Initialize() {
 
-    hWindow = FindWindowA("RiotWindowClass", nullptr);
+    hWindow = FindWindowA(XorStr("RiotWindowClass").c_str(), nullptr);
     if (!hWindow) {
-        logger->Debug("Couldn't find window class.");
+        logger->Debug(XorStr("Couldn't find window class.").c_str());
         return false;
     }
 
     GetWindowThreadProcessId(hWindow, &pid);
     if (pid == NULL) {
-        logger->Debug("Couldn't retrieve league process id");
+        logger->Debug(XorStr("Couldn't retrieve league process id").c_str());
         return false;
 
     }
 
     hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
     if (hProcess == NULL) {
-        logger->Debug("Couldn't open league process");
+        logger->Debug(XorStr("Couldn't open league process").c_str());
         return false;
     }
 
@@ -31,11 +32,11 @@ bool MemoryManager::Initialize() {
         baseAddress = (DWORD)hMods[0];
     }
     else {
-        logger->Debug("Couldn't retrieve league base address");
+        logger->Debug(XorStr("Couldn't retrieve league base address").c_str());
         return false;
     }
 
-    logger->Debug("Base Address: %#08x", this->baseAddress);
+    logger->Debug(XorStr("Base Address: %#08x").c_str(), this->baseAddress);
 
     return true;
 }

@@ -22,10 +22,10 @@ enum LogLevel {
 class Logger { // TODO: Recode, its ghetto and using 2 streams but i need it for testing.
 private:
     LogLevel level{LogLevel::Info};
+   
 
     std::string TimeFormat() {
-        
-        return "[]: ";
+        return "[]";
 
     }
 

@@ -21,6 +21,6 @@ int main() {
 
     while (true) {
         eloDopamine->Update();
-        std::this_thread::sleep_for(1ms);
+        Sleep(1);
     }
 }

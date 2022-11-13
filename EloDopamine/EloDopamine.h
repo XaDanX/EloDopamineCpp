@@ -3,9 +3,10 @@
 #include "ObjectManager.h"
 #include "Engine.h"
 #include "InputController.h"
+#include "XorStr.hpp"
 
 namespace {
-	std::string deployablePath("C:\\Deployable");
+	std::string deployablePath(XorStr("C:\\Deployable").c_str());
 }
 
 class EloDopamine {

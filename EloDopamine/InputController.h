@@ -5,7 +5,7 @@
 #include "Vector.h"
 #include <thread>
 #include <iostream>
-
+#include "KeyCodes.h"
 class InputController {
 private:
 	std::queue<std::unique_ptr<OrderBase>> orderQueue;
@@ -18,11 +18,16 @@ private:
 	void RightClickDown();
 	void RightClickUp();
 
+	void KeyDown(HKey key);
+	void KeyUp(HKey key);
+
 public:
 	void Update();
 
 	void IssueClickAt(int x, int y);
 	void IssueClick();
+
+	void IssueClickButtonAt(int x, int y, HKey button);
 
 	Vector2 GetCursorPosition();
 

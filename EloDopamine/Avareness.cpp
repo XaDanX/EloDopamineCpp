@@ -107,48 +107,48 @@ void Avareness::OnGui() {
 		ImGui::Checkbox(XorStr("Enabled").c_str(), &AvarenessOptions::drawRanges);
 		ImGui::Separator();
 
-		ImGui::Checkbox("Ally Ranges", &AvarenessOptions::drawAllyRanges);
+		ImGui::Checkbox(XorStr("Ally Ranges").c_str(), &AvarenessOptions::drawAllyRanges);
 		ImGui::SameLine();
-		ImGui::ColorEdit4("#AllyRangesColor", &AvarenessOptions::allyRangesColor.x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
+		ImGui::ColorEdit4(XorStr("#AllyRangesColor").c_str(), &AvarenessOptions::allyRangesColor.x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
 
-		ImGui::Checkbox("Enemy Ranges", &AvarenessOptions::drawEnemyRanges);
+		ImGui::Checkbox(XorStr("Enemy Ranges").c_str(), &AvarenessOptions::drawEnemyRanges);
 		ImGui::SameLine();
-		ImGui::ColorEdit4("#EnemyRangesColor", &AvarenessOptions::enemyRangesColor.x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
+		ImGui::ColorEdit4(XorStr("#EnemyRangesColor").c_str(), &AvarenessOptions::enemyRangesColor.x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
 
-		ImGui::Checkbox("Player Ranges", &AvarenessOptions::drawPlayerRanges);
+		ImGui::Checkbox(XorStr("Player Ranges").c_str(), &AvarenessOptions::drawPlayerRanges);
 		ImGui::SameLine();
-		ImGui::ColorEdit4("#PlayerRangesColor", &AvarenessOptions::playerRangesColor.x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
+		ImGui::ColorEdit4(XorStr("#PlayerRangesColor").c_str(), &AvarenessOptions::playerRangesColor.x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
 
 	}
 
-	if (ImGui::CollapsingHeader("Paths")) {
+	if (ImGui::CollapsingHeader(XorStr("Paths").c_str())) {
 
-		ImGui::Checkbox("Enabled", &AvarenessOptions::drawPaths);
+		ImGui::Checkbox(XorStr("Enabled").c_str(), &AvarenessOptions::drawPaths);
 		ImGui::Separator();
 
-		ImGui::Checkbox("Ally Paths", &AvarenessOptions::drawAllyPaths);
+		ImGui::Checkbox(XorStr("Ally Paths").c_str(), &AvarenessOptions::drawAllyPaths);
 		ImGui::SameLine();
-		ImGui::ColorEdit4("#AllyPathsColor", &AvarenessOptions::allyPathsColor.x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
+		ImGui::ColorEdit4(XorStr("#AllyPathsColor").c_str(), &AvarenessOptions::allyPathsColor.x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
 
-		ImGui::Checkbox("Enemy Paths", &AvarenessOptions::drawEnemyPaths);
+		ImGui::Checkbox(XorStr("Enemy Paths").c_str(), &AvarenessOptions::drawEnemyPaths);
 		ImGui::SameLine();
-		ImGui::ColorEdit4("#EnemyPathsColor", &AvarenessOptions::enemyPathsColor.x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
+		ImGui::ColorEdit4(XorStr("#EnemyPathsColor").c_str(), &AvarenessOptions::enemyPathsColor.x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
 
-		ImGui::Checkbox("Player Paths", &AvarenessOptions::drawPlayerPaths);
+		ImGui::Checkbox(XorStr("Player Paths").c_str(), &AvarenessOptions::drawPlayerPaths);
 		ImGui::SameLine();
-		ImGui::ColorEdit4("#PlayerPathsColor", &AvarenessOptions::playerPathsColor.x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
+		ImGui::ColorEdit4(XorStr("#PlayerPathsColor").c_str(), &AvarenessOptions::playerPathsColor.x, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
 	}
 
 }
 
 std::string Avareness::ModuleType()
 {
-	return "utility";
+	return XorStr("utility");
 }
 
 std::string Avareness::GetName()
 {
-	return "Avareness";
+	return XorStr("Avareness");
 }
 
 void Avareness::OnInitialize() {

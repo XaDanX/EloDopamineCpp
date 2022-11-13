@@ -45,7 +45,7 @@ void EloDopamine::Update() {
     if (this->isGuiOpen) {
         ImGui::SetNextWindowPos(ImVec2(134, 56));
         ImGui::SetNextWindowSize(ImVec2(570, 774));
-        ImGui::Begin("EloDopamine | DEV");
+        ImGui::Begin(XorStr("EloDopamine | DEV").c_str());
         this->OnGui();
         ImGui::End();
     }
@@ -55,10 +55,10 @@ void EloDopamine::Update() {
     ImGui::SetNextWindowSize({ 231.f ,109.f});
     ImGui::SetNextWindowPos(ImVec2(1382, 893));
     ImGui::SetNextWindowBgAlpha(0.5);
-    ImGui::Begin("Permashow", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoTitleBar);
-    ImGui::Text("PERMASHOW");
+    ImGui::Begin(XorStr("Permashow").c_str(), 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoTitleBar);
+    ImGui::Text(XorStr("PERMASHOW").c_str());
     ImGui::Separator();
-    ImGui::Text("Update: %f ms", (float)dur.count());
+    ImGui::Text(XorStr("Update: %f ms").c_str(), (float)dur.count());
     ImGui::End();
 
     this->overlay->RenderFrame(); 
@@ -88,7 +88,7 @@ void EloDopamine::Initialize() {
 
 
 
-    logger->Info("Initializing modules..");
+    logger->Info(XorStr("Initializing modules..").c_str());
     engine->Update();
     objectManager->Update();
 
@@ -106,7 +106,7 @@ void EloDopamine::Initialize() {
 
     moduleManager->Initialize();
 
-    logger->Info("Initialization done!");
+    logger->Info(XorStr("Initialization done!").c_str());
 
 }
 

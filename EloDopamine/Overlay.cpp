@@ -3,6 +3,7 @@
 #include <d3d11.h>
 #include "Renderer.h"
 #include "StringUtils.h"
+#include "XorStr.hpp"
 
 ID3D11Device* Overlay::dxDevice = NULL;
 ID3D11DeviceContext* Overlay::dxDeviceContext = NULL;
@@ -89,7 +90,7 @@ void Overlay::Init() {
 	if (!CreateDeviceD3D(hWindow))
 	{
 		CleanupDeviceD3D();
-		throw std::runtime_error("Failed to create D3D device");
+		throw std::runtime_error(XorStr("Failed to create D3D device"));
 	}
 
 
@@ -99,9 +100,9 @@ void Overlay::Init() {
 	io.ConfigWindowsMoveFromTitleBarOnly = true;
 
 
-	io.Fonts->AddFontFromFileTTF("C:\\Deployable\\Font.ttf", 16.0f);
-	Fonts::font11 = io.Fonts->AddFontFromFileTTF("C:\\Deployable\\Font.ttf", 11.0f);
-	Fonts::font19 = io.Fonts->AddFontFromFileTTF("C:\\Deployable\\Font.ttf", 22.0f);
+	io.Fonts->AddFontFromFileTTF(XorStr("C:\\Deployable\\Font.ttf").c_str(), 16.0f);
+	Fonts::font11 = io.Fonts->AddFontFromFileTTF(XorStr("C:\\Deployable\\Font.ttf").c_str(), 11.0f);
+	Fonts::font19 = io.Fonts->AddFontFromFileTTF(XorStr("C:\\Deployable\\Font.ttf").c_str(), 22.0f);
 	this->SetupStyle();
 
 
@@ -253,9 +254,9 @@ void Overlay::CreateRenderTarget()
 {
 	ID3D11Resource* pBackBuffer;
 	if (S_OK != dxSwapChain->GetBuffer(0, IID_PPV_ARGS(&pBackBuffer)))
-		throw std::runtime_error("Failed to retrieve DX11 swap chain buffer");
+		throw std::runtime_error(XorStr("Failed to retrieve DX11 swap chain buffer"));
 	if (S_OK != dxDevice->CreateRenderTargetView(pBackBuffer, NULL, &dxRenderTarget))
-		throw std::runtime_error("Failed to create DX11 render target");
+		throw std::runtime_error(XorStr("Failed to create DX11 render target"));
 	pBackBuffer->Release();
 }
 

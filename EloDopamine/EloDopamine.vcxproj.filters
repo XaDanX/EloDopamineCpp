@@ -47,9 +47,6 @@
     <ClCompile Include="Spell.cpp">
       <Filter>Game\GameObjects\Hero\SpellBook</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectView.cpp">
-      <Filter>Modules\ObjectView</Filter>
-    </ClCompile>
     <ClCompile Include="UnitInfo.cpp">
       <Filter>Game\GameData</Filter>
     </ClCompile>
@@ -123,9 +120,6 @@
     </Filter>
     <Filter Include="Modules">
       <UniqueIdentifier>{26537a43-1845-4004-be60-834b7698770f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\ObjectView">
-      <UniqueIdentifier>{1148f859-dfb4-4b4c-a109-36c308746f97}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\GameData">
       <UniqueIdentifier>{698db342-2d8b-46a9-9ad2-b80726d9eb7b}</UniqueIdentifier>
@@ -228,9 +222,6 @@
     <ClInclude Include="Module.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectView.h">
-      <Filter>Modules\ObjectView</Filter>
-    </ClInclude>
     <ClInclude Include="UnitInfo.h">
       <Filter>Game\GameData</Filter>
     </ClInclude>
@@ -293,6 +284,9 @@
     </ClInclude>
     <ClInclude Include="XorStr.hpp">
       <Filter>Security</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyClickOrder.h">
+      <Filter>Game\Controller\Orders</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

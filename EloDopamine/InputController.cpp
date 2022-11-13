@@ -3,6 +3,7 @@
 #include "MouseMoveOrder.h"
 #include "RightClickOrder.h"
 #include "BlockInputOrder.h"
+#include "KeyClickOrder.h"
 using namespace std::chrono_literals;
 
 void InputController::MoveCursor(float x, float y) {
@@ -47,13 +48,48 @@ void InputController::RightClickUp() {
 	SendInput(1, &input, sizeof(INPUT));
 }
 
+void InputController::KeyDown(HKey key) {
+	INPUT input;
+	input.type = INPUT_KEYBOARD;
+	input.ki.wScan = key;
+	input.ki.time = 0;
+	input.ki.dwExtraInfo = 0;
+	input.ki.wVk = 0;
+	input.ki.dwFlags = KEYEVENTF_SCANCODE;
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+void InputController::KeyUp(HKey key) {
+	INPUT input;
+	input.type = INPUT_KEYBOARD;
+	input.ki.wScan = key;
+	input.ki.time = 0;
+	input.ki.dwExtraInfo = 0;
+	input.ki.wVk = 0;
+	input.ki.dwFlags = KEYEVENTF_SCANCODE | KEYEVENTF_KEYUP;
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+
+
 
 void InputController::Update() {
-	if (this->orderQueue.empty())
+	__try {
+		while (true) {
+			if (this->orderQueue.empty())
+				return;
+			auto& current = this->orderQueue.front();
+			if (current->Execute()) {
+				this->orderQueue.pop();
+
+			}
+			else {
+				return;
+			}
+		}
+	}
+	__except (true) {
 		return;
-	auto& current = this->orderQueue.front();
-	if (current->Execute()) {
-		this->orderQueue.pop();
 	}
 }
 
@@ -64,7 +100,7 @@ void InputController::IssueClickAt(int x, int y) {
 	this->orderQueue.emplace(new BlockInputOrder(true));
 	this->orderQueue.emplace(new MouseMoveOrder(x, y));
 	this->orderQueue.emplace(new RightClickOrder(0));
-	this->orderQueue.emplace(new TimeoutOrder(12));
+	this->orderQueue.emplace(new TimeoutOrder(8));
 	this->orderQueue.emplace(new RightClickOrder(1));
 	this->orderQueue.emplace(new MouseMoveOrder(lastPos.x, lastPos.y));
 	this->orderQueue.emplace(new BlockInputOrder(false));
@@ -73,8 +109,20 @@ void InputController::IssueClickAt(int x, int y) {
 
 void InputController::IssueClick() {
 	this->orderQueue.emplace(new RightClickOrder(0));
-	this->orderQueue.emplace(new TimeoutOrder(12));
+	this->orderQueue.emplace(new TimeoutOrder(8));
 	this->orderQueue.emplace(new RightClickOrder(1));
+}
+
+void InputController::IssueClickButtonAt(int x, int y, HKey button) {
+	auto lastPos = this->GetCursorPosition();
+
+	this->orderQueue.emplace(new BlockInputOrder(true));
+	this->orderQueue.emplace(new MouseMoveOrder(x, y));
+	this->orderQueue.emplace(new KeyClickOrder(button, 0));
+	this->orderQueue.emplace(new TimeoutOrder(2));
+	this->orderQueue.emplace(new KeyClickOrder(button, 1));
+	this->orderQueue.emplace(new MouseMoveOrder(lastPos.x, lastPos.y));
+	this->orderQueue.emplace(new BlockInputOrder(false));
 }
 
 Vector2 InputController::GetCursorPosition() {
@@ -86,6 +134,6 @@ Vector2 InputController::GetCursorPosition() {
 void InputController::UpdateLoopThread() {
 	while (true) {
 		this->Update();
-		std::this_thread::sleep_for(500ns);
+		std::this_thread::sleep_for(1ms);
 	}
 }

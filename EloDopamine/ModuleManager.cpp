@@ -1,12 +1,12 @@
 #include "ModuleManager.h"
 #include "imgui/imgui.h"
-
+#include "XorStr.hpp"
 void ModuleManager::RegisterModule(ModuleBase* module) {
 
-	if (module->ModuleType() != "utility") {
+	if (module->ModuleType() != XorStr("utility").c_str()) {
 		if (objectManager->GetLocalPlayer().championName == module->ModuleType()) {
 			this->moduleList.emplace_back(module);
-			logger->Info("Script loaded: %s | For champion: %s", module->GetName().c_str(), module->ModuleType().c_str());
+			logger->Info(XorStr("Script loaded: %s | For champion: %s").c_str(), module->GetName().c_str(), module->ModuleType().c_str());
 		}
 		else {
 			delete module; 
@@ -14,7 +14,7 @@ void ModuleManager::RegisterModule(ModuleBase* module) {
 	}
 	else {
 		this->moduleList.emplace_back(module);
-		logger->Info("Utility script loaded: %s", module->GetName().c_str(), module->ModuleType().c_str());
+		logger->Info(XorStr("Utility script loaded: %s").c_str(), module->GetName().c_str(), module->ModuleType().c_str());
 	}
 }
 

@@ -4,6 +4,7 @@
 #include "ObjectManager.h"
 #include "imgui/imgui.h"
 #include "Renderer.h"
+#include "XorStr.hpp"
 
 namespace OrbWalkerOptions {
 	bool enabled = false;
@@ -24,14 +25,14 @@ namespace OrbWalkerUtils {
 	}
 
 	bool CanAttack() {
-		return lastAutoAttackTick + GetAttackDelay() + OrbWalkerOptions::ping / 2 < GetTickCount64();
+		return lastAutoAttackTick + GetAttackDelay() + OrbWalkerOptions::ping / 2 < GetTickCount();
 	}
 
 	bool CanMove() {
-		return lastMoveTick < GetTickCount64();
+		return lastMoveTick < GetTickCount();
 	}
 
-	Hero& GetBestTarget() {
+	Hero GetBestTarget() {
 		float oldDistance = FLT_MAX;
 		Hero bestTarget = objectManager->GetLocalPlayer();
 		for (auto& unit : objectManager->GetHeroList())
@@ -70,38 +71,38 @@ void OrbWalker::OnUpdate() {
 		if (!target.IsLocalPlayer() && target.IsValidTarget()) {
 			if (OrbWalkerUtils::CanAttack()) {
 				inputController->IssueClickAt(target_w.x, target_w.y);
-				OrbWalkerUtils::lastAutoAttackTick = GetTickCount64();
-				OrbWalkerUtils::lastMoveTick = GetTickCount64() + OrbWalkerUtils::GetWindupTime();
+				OrbWalkerUtils::lastAutoAttackTick = GetTickCount();
+				OrbWalkerUtils::lastMoveTick = GetTickCount() + OrbWalkerUtils::GetWindupTime();
 				return;
 			}
 		}
 		if (OrbWalkerUtils::CanMove()) {
 			inputController->IssueClick();
-			OrbWalkerUtils::lastMoveTick = GetTickCount64() + 60;
+			OrbWalkerUtils::lastMoveTick = GetTickCount() + 80;
 			return;
 		}
-		
+
 
 	}
 }
 
 void OrbWalker::OnGui() {
-	ImGui::Checkbox("Enabled", &OrbWalkerOptions::enabled);
+	ImGui::Checkbox(XorStr("Enabled").c_str(), &OrbWalkerOptions::enabled);
 	ImGui::Separator();
-	ImGui::SliderFloat("Ping", &OrbWalkerOptions::ping, 5, 200);
+	ImGui::SliderFloat(XorStr("Ping").c_str(), &OrbWalkerOptions::ping, 5, 200);
 	ImGui::PushFont(Fonts::font19);
-	ImGui::TextColored(ImColor(252, 218, 0, 255), "OrbWalker key");
+	ImGui::TextColored(ImColor(252, 218, 0, 255), XorStr("OrbWalker key").c_str());
 	ImGui::PopFont();
 	ImGui::SameLine();
 	renderer->CustomGuiHotkey(&OrbWalkerOptions::hotKey);
 }
 
 std::string OrbWalker::ModuleType() {
-	return "utility";
+	return XorStr("utility");
 }
 
 std::string OrbWalker::GetName() {
-	return "SpaceWalker++";
+	return XorStr("SpaceWalker++");
 }
 
 void OrbWalker::OnInitialize()

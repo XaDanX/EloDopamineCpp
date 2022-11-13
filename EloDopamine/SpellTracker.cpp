@@ -2,6 +2,7 @@
 #include "ObjectManager.h"
 #include "Engine.h"
 #include "Renderer.h"
+#include "XorStr.hpp"
 
 namespace SpellTrackerOptions {
 	auto enabled = true;
@@ -44,18 +45,18 @@ void SpellTracker::OnUpdate() {
 }
 
 void SpellTracker::OnGui() {
-	ImGui::Checkbox("Enabled", &SpellTrackerOptions::enabled);
+	ImGui::Checkbox(XorStr("Enabled").c_str(), &SpellTrackerOptions::enabled);
 	ImGui::Separator();
 }
 
 std::string SpellTracker::ModuleType()
 {
-	return "utility";
+	return XorStr("utility");
 }
 
 std::string SpellTracker::GetName()
 {
-	return "SpellTracker";
+	return XorStr("SpellTracker");
 }
 
 void SpellTracker::OnInitialize()
