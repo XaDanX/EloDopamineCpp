@@ -16,11 +16,8 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
     memcpy(&actionState, &buff[Offsets::ObjActionState], sizeof(uint16_t));
     memcpy(&spellBookPointers, &buff[Offsets::ObjSpellBOOK], sizeof(int) * 6);
     memcpy(&attackSpeedMult, &buff[Offsets::ObjATKSpeedMulti], sizeof(float));
-    int buffManagerAddress;
     memcpy(&buffManagerAddress, &buff[Offsets::ObjBuffManager], sizeof(int));
-    int buffManagerStart;
     memcpy(&buffManagerStart, &buff[Offsets::ObjBuffManager + 0x10], sizeof(int));
-    int buffManagerEnd;
     memcpy(&buffManagerEnd, &buff[Offsets::ObjBuffManager + 0x14], sizeof(int));
 
     bool alive;
@@ -49,8 +46,6 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
 
 
     this->aiManager.Update();
-    this->buffManager.Update(buffManagerAddress, buffManagerStart, buffManagerEnd);
-
 
     this->UpdateSpells();
 
@@ -117,4 +112,9 @@ int Hero::ReadAiManager() {
     int v4 = memoryManager->Read<int>((v2 + (4 * v1 + 12)));
     v4 = v4 ^ (~v3);
     return memoryManager->Read<int>(v4 + 8);
+}
+
+BuffManager& Hero::GetBuffManager() {
+    this->buffManager.Update(this->buffManagerAddress, this->buffManagerStart, this->buffManagerEnd);
+    return this->buffManager;
 }

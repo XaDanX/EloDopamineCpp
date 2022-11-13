@@ -14,25 +14,10 @@ void BuffManager::Update(int buffManager, int startAddress, int endAddress) {
 				continue;
 
 			Buff buffObj = Buff();
-			if (buffObj.Update(buffAddress))
-				this->buffList.push_back(buffObj);
-		}
-	}
-
-	/*
-	while (currentAddress != endAddress) {
-		int buffAddr = memoryManager->Read<int>(currentAddress);
-		if (buffAddr) {
-			int buffEntry = memoryManager->Read<int>(buffAddr + 0x8);
-			if (buffEntry) {
-				Buff buffObj = Buff();
-				buffObj.Update(buffEntry);
+			if (buffObj.Update(buffAddress)) {
 				this->buffList.push_back(buffObj);
 			}
+			
 		}
-		currentAddress += 0x8;
-
-	}*/
-
-
+	}
 }

@@ -12,6 +12,12 @@
 class Hero : public GameObject {
 private:
     int spellBookPointers[6];
+    BuffManager buffManager = BuffManager();
+
+    int buffManagerAddress;
+    int buffManagerStart;
+    int buffManagerEnd;
+
 public:
     std::string championName;
     float attackSpeedMult;
@@ -25,7 +31,6 @@ public:
     Spell F_SPELL = Spell();
 
     AiManager aiManager = AiManager();
-    BuffManager buffManager = BuffManager();
 
 public:
     bool Load(unsigned int address, bool deepLoad);
@@ -42,6 +47,8 @@ public:
     bool IsLocalPlayer();
 
     int ReadAiManager();
+
+    BuffManager& GetBuffManager();
 
 
 };
