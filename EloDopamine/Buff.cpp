@@ -10,5 +10,5 @@ void Buff::Update(int address) {
 	memcpy(&startTime, &buff[Offsets::BuffEntryBuffStartTime], sizeof(float));
 	memcpy(&endTime, &buff[Offsets::BuffEntryBuffEndTime], sizeof(float));
 	memcpy(&count, &buff[Offsets::BuffEntryBuffCount], sizeof(int));
-	this->name = memoryManager->ReadStringSized(this->address + 0x4, 30);
+	this->name = memoryManager->ReadStringSized(this->address + 0x8, 30);
 }

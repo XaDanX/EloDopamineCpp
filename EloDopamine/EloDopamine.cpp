@@ -11,6 +11,13 @@
 #include <filesystem>
 namespace fs = std::filesystem;
 
+struct Vertex {
+    float    pos[3];
+    D3DCOLOR col;
+    float    uv[2];
+};
+#define COL_TO_D3COL(col) D3DCOLOR_ARGB((int)(col.w*255), (int)(col.x*255), (int)(col.y*255), (int)(col.z*255))
+
 void EloDopamine::OnUpdate() {
     moduleManager->UpdateModules();
 }
@@ -91,7 +98,6 @@ void EloDopamine::Initialize() {
     for (const auto& entry : fs::directory_iterator(path)) {
         textureManager->LoadTexture(entry.path().stem().string(), entry.path().string().c_str());
     }*/
-    
 
     std::thread engineUpdateThread = engine->spawn();
     std::thread inputUpdateThread = inputController->spawn();
