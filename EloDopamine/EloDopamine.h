@@ -14,6 +14,7 @@ private:
 	bool isGuiOpen = false;
 public:
 	void Initialize();
+	static void OnExit(int i);
 
 	void Update();
 	void OnUpdate();

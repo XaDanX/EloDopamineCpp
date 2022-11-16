@@ -24,10 +24,14 @@ void ModuleManager::RegisterModules() {
 	*/
 	this->RegisterModule(new OrbWalker());
 	this->RegisterModule(new SpellTracker());
+	this->RegisterModule(new Avareness());
 }
 
 void ModuleManager::Initialize() {
 	this->RegisterModules();
+	for (auto& currentModule : this->moduleList) {
+		currentModule->OnInitialize();
+	}
 }
 
 void ModuleManager::UpdateModules() {
@@ -39,9 +43,13 @@ void ModuleManager::UpdateModules() {
 void ModuleManager::UpdateModulesGui() {
 	for (auto& currentModule : this->moduleList) {
 		if (ImGui::CollapsingHeader(currentModule->GetName().c_str())) {
-			ImGui::BeginChild("##UWU");
 			currentModule->OnGui();
-			ImGui::EndChild();
 		}
+	}
+}
+
+void ModuleManager::OnExit() {
+	for (auto& currentModule : this->moduleList) {
+		currentModule->OnExit();
 	}
 }

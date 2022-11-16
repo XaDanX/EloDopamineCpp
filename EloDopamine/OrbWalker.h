@@ -6,5 +6,8 @@ public:
 	void OnGui();
 	std::string ModuleType();
 	std::string GetName();
+
+	void OnInitialize();
+	void OnExit();
 };
 

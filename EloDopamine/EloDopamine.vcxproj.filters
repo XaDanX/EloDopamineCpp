@@ -4,12 +4,6 @@
     <ClCompile Include="MemoryManager.cpp">
       <Filter>Memory</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Game\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Hero.cpp">
-      <Filter>Game\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Offsets.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -51,7 +45,7 @@
       <Filter>Game\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Spell.cpp">
-      <Filter>Game\GameObjects\SpellBook</Filter>
+      <Filter>Game\GameObjects\Hero\SpellBook</Filter>
     </ClCompile>
     <ClCompile Include="ObjectView.cpp">
       <Filter>Modules\ObjectView</Filter>
@@ -64,9 +58,6 @@
     </ClCompile>
     <ClCompile Include="ModuleManager.cpp">
       <Filter>Game\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="Minion.cpp">
-      <Filter>Game\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="InputController.cpp">
       <Filter>Game\Controller</Filter>
@@ -82,6 +73,27 @@
     </ClCompile>
     <ClCompile Include="SpellTracker.cpp">
       <Filter>Modules\SpellTracker</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Game\GameObjects\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Hero.cpp">
+      <Filter>Game\GameObjects\Hero</Filter>
+    </ClCompile>
+    <ClCompile Include="Minion.cpp">
+      <Filter>Game\GameObjects\Minion</Filter>
+    </ClCompile>
+    <ClCompile Include="Avareness.cpp">
+      <Filter>Modules\Avareness</Filter>
+    </ClCompile>
+    <ClCompile Include="AiManager.cpp">
+      <Filter>Game\GameObjects\Hero\AiManager</Filter>
+    </ClCompile>
+    <ClCompile Include="BuffManager.cpp">
+      <Filter>Game\GameObjects\Hero\BuffManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Buff.cpp">
+      <Filter>Game\GameObjects\Hero\BuffManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -109,9 +121,6 @@
     <Filter Include="Game\Engine">
       <UniqueIdentifier>{cdd8b798-5c14-46e9-bf0b-9532e2aca3bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\GameObjects\SpellBook">
-      <UniqueIdentifier>{0fa4ac46-2630-42e1-a133-696f42f5a758}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Modules">
       <UniqueIdentifier>{26537a43-1845-4004-be60-834b7698770f}</UniqueIdentifier>
     </Filter>
@@ -133,16 +142,34 @@
     <Filter Include="Modules\SpellTracker">
       <UniqueIdentifier>{98192cc2-b0e1-48bc-a014-30ca97dd40bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\GameObjects\GameObject">
+      <UniqueIdentifier>{47f18e50-8a14-47f6-bcf6-ca53a4749084}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObjects\Hero">
+      <UniqueIdentifier>{4653aadd-7e40-45b6-9828-3fc1cb9451e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObjects\Hero\SpellBook">
+      <UniqueIdentifier>{0fa4ac46-2630-42e1-a133-696f42f5a758}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObjects\Minion">
+      <UniqueIdentifier>{57c4a000-9269-45ec-8d96-42366bfb9769}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObjects\Hero\AiManager">
+      <UniqueIdentifier>{49b61b6e-bd32-4881-be12-8d2ddbc58933}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Avareness">
+      <UniqueIdentifier>{afd6e3bb-daf4-43a4-a135-232f1fdf5a6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObjects\Hero\BuffManager">
+      <UniqueIdentifier>{8632ddb6-b0be-4986-b225-b10e99174216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Security">
+      <UniqueIdentifier>{fdfb33f8-d0d4-4af0-9e23-82ea7e99ccc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MemoryManager.h">
       <Filter>Memory</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Game\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Hero.h">
-      <Filter>Game\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Offsets.h">
       <Filter>Game</Filter>
@@ -151,9 +178,6 @@
       <Filter>Game\Managers</Filter>
     </ClInclude>
     <ClInclude Include="StringUtils.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="XorStr.h">
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">
@@ -199,7 +223,7 @@
       <Filter>Game\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Spell.h">
-      <Filter>Game\GameObjects\SpellBook</Filter>
+      <Filter>Game\GameObjects\Hero\SpellBook</Filter>
     </ClInclude>
     <ClInclude Include="Module.h">
       <Filter>Modules</Filter>
@@ -215,9 +239,6 @@
     </ClInclude>
     <ClInclude Include="ModuleManager.h">
       <Filter>Game\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Minion.h">
-      <Filter>Game\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="InputController.h">
       <Filter>Game\Controller</Filter>
@@ -245,6 +266,33 @@
     </ClInclude>
     <ClInclude Include="SpellTracker.h">
       <Filter>Modules\SpellTracker</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Game\GameObjects\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>Game\GameObjects\Hero</Filter>
+    </ClInclude>
+    <ClInclude Include="Minion.h">
+      <Filter>Game\GameObjects\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyCodes.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Avareness.h">
+      <Filter>Modules\Avareness</Filter>
+    </ClInclude>
+    <ClInclude Include="AiManager.h">
+      <Filter>Game\GameObjects\Hero\AiManager</Filter>
+    </ClInclude>
+    <ClInclude Include="BuffManager.h">
+      <Filter>Game\GameObjects\Hero\BuffManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Buff.h">
+      <Filter>Game\GameObjects\Hero\BuffManager</Filter>
+    </ClInclude>
+    <ClInclude Include="XorStr.hpp">
+      <Filter>Security</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

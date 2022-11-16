@@ -1,11 +1,13 @@
 #include "Hero.h"
 #include "ObjectManager.h"
+#include "XorStr.hpp"
 bool Hero::Load(unsigned int address, bool deepLoad) {
-    this->address = address;
-    memoryManager->ReadBuffer(address, this->buff, Hero::objectSize);
+    if (!this->address)
+        this->address = address;
+    memoryManager->ReadBuffer(this->address, this->buff, Hero::objectSize);
 
     memcpy(&index, &buff[Offsets::ObjIndex], sizeof(byte));
-    memcpy(&team, &buff[Offsets::ObjTeam], sizeof(int));
+    memcpy(&team, &buff[Offsets::ObjTeam], sizeof(short));
     memcpy(&health, &buff[Offsets::ObjHealth], sizeof(float));
     memcpy(&maxHealth, &buff[Offsets::ObjMaxHealth], sizeof(float));
     memcpy(&attackRange, &buff[Offsets::ObjATKRange], sizeof(float));
@@ -15,6 +17,10 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
     memcpy(&actionState, &buff[Offsets::ObjActionState], sizeof(uint16_t));
     memcpy(&spellBookPointers, &buff[Offsets::ObjSpellBOOK], sizeof(int) * 6);
     memcpy(&attackSpeedMult, &buff[Offsets::ObjATKSpeedMulti], sizeof(float));
+    memcpy(&buffManagerAddress, &buff[Offsets::ObjBuffManager], sizeof(int));
+    memcpy(&buffManagerStart, &buff[Offsets::ObjBuffManager + 0x10], sizeof(int));
+    memcpy(&buffManagerEnd, &buff[Offsets::ObjBuffManager + 0x14], sizeof(int));
+
     bool alive;
     memcpy(&alive, &buff[Offsets::ObjDead], sizeof(BYTE));
     if (alive % 2 == 0) {
@@ -23,13 +29,31 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
         this->isAlive = false;
     }
 
+
+
     if (championName.empty()) {
         championName = memoryManager->ReadString(this->address + Offsets::ObjName);
     }
 
     if (this->unitInfo == nullptr)
         this->unitInfo = gameData->GetUnitInfoByName(this->championName);
+        
    
+    if (this->aiManager.address == 0) {
+        this->aiManager.address = this->ReadAiManager();
+        //logger->Debug("%#08x", this->aiManager.address);
+    }
+
+
+
+    this->aiManager.Update();
+
+    this->UpdateSpells();
+
+    return true;
+}
+
+void Hero::UpdateSpells() {
 
     this->Q_SPELL.address = this->spellBookPointers[0];
     this->W_SPELL.address = this->spellBookPointers[1];
@@ -37,14 +61,6 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
     this->R_SPELL.address = this->spellBookPointers[3];
     this->D_SPELL.address = this->spellBookPointers[4];
     this->F_SPELL.address = this->spellBookPointers[5];
-    this->UpdateSpells();
-
-
-
-    return true;
-}
-
-void Hero::UpdateSpells() {
     
     this->Q_SPELL.Update();
     this->W_SPELL.Update();
@@ -65,7 +81,27 @@ Vector2 Hero::GetHealthBarPosition() {
 }
 
 float Hero::GetTotalAttackSpeed() {
-    return this->unitInfo->baseAttackSpeed * this->attackSpeedMult;
+    float attackSpeed = (this->attackSpeedMult - 1.0) * this->unitInfo->attackSpeedRatio + this->unitInfo->baseAttackSpeed;
+    if (attackSpeed <= 2.5) {
+        return attackSpeed;
+    }
+    if (IsLethalTempoActive()) {
+        return attackSpeed;
+    }
+    return 2.5;//this->unitInfo->baseAttackSpeed * this->attackSpeedMult;
+}
+
+bool Hero::IsLethalTempoActive() {
+    
+  BuffManager localplayerbuffs =  objectManager->GetLocalPlayer().GetBuffManager();
+
+  for (int i = 0; i < (localplayerbuffs.buffList.size()); i ++) {
+      //logger->Debug("%s\n",localplayerbuffs.buffList[i].name.c_str());
+      if (localplayerbuffs.buffList[i].name != XorStr("assets/perks/styles/precision/lethaltempo/lethaltempo.lua").c_str()) continue;
+      if (localplayerbuffs.buffList[i].count != 6) continue;
+      return true;
+  }
+   return false;
 }
 
 float Hero::DistanceToHero(Hero hero) {
@@ -75,8 +111,31 @@ float Hero::DistanceToHero(Hero hero) {
 bool Hero::IsValidTarget() {
     if (this->address == objectManager->GetLocalPlayer().address) return false;
     if (!this->visible) return false;
-    if (!this->team == objectManager->GetLocalPlayer().team) return false;
+    if (this->team == objectManager->GetLocalPlayer().team) return false;
     if (!this->isAlive) return false;
     return true;
 }
 
+bool Hero::IsValidEntity() {
+    if (!this->visible) return false;
+    if (!this->isAlive) return false;
+    return true;
+}
+
+bool Hero::IsLocalPlayer() {
+    return (this->address == objectManager->GetLocalPlayer().address);
+}
+
+int Hero::ReadAiManager() {
+    int v1 = memoryManager->Read<__int8>(this->address + Offsets::AIManager);
+    int v2 = this->address + Offsets::AIManager - 8;
+    int v3 = memoryManager->Read<int>(v2 + 4);
+    int v4 = memoryManager->Read<int>((v2 + (4 * v1 + 12)));
+    v4 = v4 ^ (~v3);
+    return memoryManager->Read<int>(v4 + 8);
+}
+
+BuffManager& Hero::GetBuffManager() {
+    this->buffManager.Update(this->buffManagerAddress, this->buffManagerStart, this->buffManagerEnd);
+    return this->buffManager;
+}

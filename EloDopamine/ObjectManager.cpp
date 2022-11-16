@@ -2,22 +2,28 @@
 
 void ObjectManager::Update() {
 
+    if (heroListPtr == 0 || minionListPtr == 0) {
+        heroListPtr = memoryManager->Read<int>(memoryManager->BaseAddress() + Offsets::HeroInterface);
+        minionListPtr = memoryManager->Read<int>(memoryManager->BaseAddress() + Offsets::MinionInterface);
+    }
 
-    int heroListPtr = memoryManager->Read<int>(memoryManager->BaseAddress() + Offsets::HeroInterface);
-    int minionListPtr = memoryManager->Read<int>(memoryManager->BaseAddress() + Offsets::MinionInterface);
-
-
-    this->heroList.clear();
     this->minionList.clear();
-    this->enemyMininList.clear();
+    this->enemyMinionList.clear();
     this->allyMinionList.clear();
 
-    auto heroPointers = memoryManager->ReadTemplate(heroListPtr);
+    if (this->heroList.size() < 9) {
+        this->heroList.clear();
+        auto heroPointers = memoryManager->ReadTemplate(heroListPtr);
 
-    for (int n : heroPointers) {
-        Hero currentHero = Hero();
-        currentHero.Load(n, false);
-        this->heroList.emplace_back(currentHero);
+        for (int n : heroPointers) {
+            Hero currentHero = Hero();
+            currentHero.Load(n, false);
+            this->heroList.emplace_back(currentHero);
+        }
+    } else {
+        for (Hero& hero : this->heroList) {
+            hero.Load(NULL, false); // It is a NULL (0) cuz hero already knows his address.
+        }
     }
 
     auto minionPointers = memoryManager->ReadTemplate(minionListPtr);
@@ -29,7 +35,7 @@ void ObjectManager::Update() {
             if (currentMinion.team == this->GetLocalPlayer().team)
                 this->allyMinionList.emplace_back(currentMinion);
             else
-                this->enemyMininList.emplace_back(currentMinion);
+                this->enemyMinionList.emplace_back(currentMinion);
             this->minionList.emplace_back(currentMinion);
         }
     }
@@ -44,9 +50,16 @@ std::vector<Hero> ObjectManager::GetHeroList() {
     return this->heroList;
 }
 
-std::vector<Minion> ObjectManager::GetMinionList()
-{
+std::vector<Minion> ObjectManager::GetMinionList() {
     return this->minionList;
+}
+
+std::vector<Minion> ObjectManager::GetAllyMinionList() {
+    return this->allyMinionList;
+}
+
+std::vector<Minion> ObjectManager::GetEnemyMinionList() {
+    return this->enemyMinionList;
 }
 
 

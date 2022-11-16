@@ -8,6 +8,7 @@
 #include "ObjectManager.h"
 #include "OrbWalker.h"
 #include "SpellTracker.h"
+#include "Avareness.h"
 
 
 class ModuleManager {
@@ -19,6 +20,7 @@ public:
 	void Initialize();
 	void UpdateModules();
 	void UpdateModulesGui();
+	void OnExit();
 	void RegisterModule(ModuleBase* module);
 };
 inline extern std::unique_ptr<ModuleManager> moduleManager = std::make_unique<ModuleManager>();

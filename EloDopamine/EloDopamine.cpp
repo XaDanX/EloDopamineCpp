@@ -11,6 +11,13 @@
 #include <filesystem>
 namespace fs = std::filesystem;
 
+struct Vertex {
+    float    pos[3];
+    D3DCOLOR col;
+    float    uv[2];
+};
+#define COL_TO_D3COL(col) D3DCOLOR_ARGB((int)(col.w*255), (int)(col.x*255), (int)(col.y*255), (int)(col.z*255))
+
 void EloDopamine::OnUpdate() {
     moduleManager->UpdateModules();
 }
@@ -36,22 +43,22 @@ void EloDopamine::Update() {
     this->OnUpdate();
 
     if (this->isGuiOpen) {
+        ImGui::SetNextWindowPos(ImVec2(134, 56));
+        ImGui::SetNextWindowSize(ImVec2(570, 774));
+        ImGui::Begin("EloDopamine | DEV");
         this->OnGui();
+        ImGui::End();
     }
 
     std::chrono::duration<float, std::milli> dur = std::chrono::high_resolution_clock::now() - timeBegin;
 
-    ImGui::SetNextWindowSize({ 231.f,109.f });
-
-    ImGui::Begin("Permashow", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
-
-    ImGui::SetCursorPos({ 7.f,28.f });
-    ImGui::PushItemWidth(119.000000);
+    ImGui::SetNextWindowSize({ 231.f ,109.f});
+    ImGui::SetNextWindowPos(ImVec2(1382, 893));
+    ImGui::SetNextWindowBgAlpha(0.5);
+    ImGui::Begin("Permashow", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoTitleBar);
+    ImGui::Text("PERMASHOW");
+    ImGui::Separator();
     ImGui::Text("Update: %f ms", (float)dur.count());
-    ImGui::PopItemWidth();
-    ImGui::SetCursorPos({ 7.f,52.f });
-    ImGui::PushItemWidth(119.000000);
-    ImGui::PopItemWidth();
     ImGui::End();
 
     this->overlay->RenderFrame(); 
@@ -91,7 +98,6 @@ void EloDopamine::Initialize() {
     for (const auto& entry : fs::directory_iterator(path)) {
         textureManager->LoadTexture(entry.path().stem().string(), entry.path().string().c_str());
     }*/
-    
 
     std::thread engineUpdateThread = engine->spawn();
     std::thread inputUpdateThread = inputController->spawn();
@@ -102,4 +108,8 @@ void EloDopamine::Initialize() {
 
     logger->Info("Initialization done!");
 
+}
+
+void EloDopamine::OnExit(int i) {
+    moduleManager->OnExit();
 }

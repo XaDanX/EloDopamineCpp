@@ -1,6 +1,5 @@
 #include "Offsets.h"
 
-
 //"version": "12.21.4770420+branch.releases-12-21.content.release"
 Offsets::Offsets() {};
 

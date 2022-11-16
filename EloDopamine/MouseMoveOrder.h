@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include "Logger.h"
 
+
 class MouseMoveOrder : public OrderBase {
 private:
 
