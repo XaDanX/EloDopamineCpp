@@ -40,12 +40,16 @@ namespace OrbWalkerUtils {
 
 			if (!unit.targetable) continue;
 
-			if (unit.DistanceToHero(objectManager->GetLocalPlayer()) - unit.GetUnitInfo()->gameplayRadius > (objectManager->GetLocalPlayer().attackRange + objectManager->GetLocalPlayer().GetUnitInfo()->gameplayRadius)) continue;
+			if (unit.DistanceToHero(objectManager->GetLocalPlayer()) /*- unit.GetUnitInfo()->gameplayRadius*/  > (objectManager->GetLocalPlayer().attackRange + objectManager->GetLocalPlayer().GetUnitInfo()->gameplayRadius)) continue;
 
-			auto distance = objectManager->GetLocalPlayer().DistanceToHero(unit);
+			//auto distance = objectManager->GetLocalPlayer().DistanceToHero(unit);
 
-			if (distance < oldDistance) {
+			/*if (distance < oldDistance) {
 				oldDistance = distance;
+				bestTarget = unit;
+			}*/
+			if (oldDistance >= unit.health) {
+				oldDistance = unit.health;
 				bestTarget = unit;
 			}
 		}
@@ -58,15 +62,11 @@ void OrbWalker::OnUpdate() {
 
 	if (!OrbWalkerOptions::enabled) return;
 	ImDrawList* canvas = ImGui::GetBackgroundDrawList();
-
-	auto target = OrbWalkerUtils::GetBestTarget();
-
-	auto player_w = engine->WorldToScreen(objectManager->GetLocalPlayer().position);
-	auto target_w = engine->WorldToScreen(target.position);
-
-	canvas->AddLine(ImVec2(player_w.x, player_w.y), ImVec2(target_w.x, target_w.y), ImColor(255, 255, 255, 150), 2);
-
 	if (GetAsyncKeyState(OrbWalkerOptions::hotKey) & 0x8000) {
+		auto player_w = engine->WorldToScreen(objectManager->GetLocalPlayer().position);
+		auto target = OrbWalkerUtils::GetBestTarget();
+		auto target_w = engine->WorldToScreen(target.position);
+		canvas->AddLine(ImVec2(player_w.x, player_w.y), ImVec2(target_w.x, target_w.y), ImColor(255, 255, 255, 150), 2);
 		if (!target.IsLocalPlayer() && target.IsValidTarget()) {
 			if (OrbWalkerUtils::CanAttack()) {
 				inputController->IssueClickAt(target_w.x, target_w.y);
@@ -80,8 +80,6 @@ void OrbWalker::OnUpdate() {
 			OrbWalkerUtils::lastMoveTick = GetTickCount64() + 60;
 			return;
 		}
-		
-
 	}
 }
 
