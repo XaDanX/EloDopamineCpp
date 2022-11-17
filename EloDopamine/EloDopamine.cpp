@@ -9,14 +9,6 @@
 #include <iostream>
 #include "TextureManager.h"
 #include <filesystem>
-namespace fs = std::filesystem;
-
-struct Vertex {
-    float    pos[3];
-    D3DCOLOR col;
-    float    uv[2];
-};
-#define COL_TO_D3COL(col) D3DCOLOR_ARGB((int)(col.w*255), (int)(col.x*255), (int)(col.y*255), (int)(col.z*255))
 
 void EloDopamine::OnUpdate() {
     moduleManager->UpdateModules();
@@ -56,9 +48,8 @@ void EloDopamine::Update() {
     ImGui::SetNextWindowPos(ImVec2(1382, 893));
     ImGui::SetNextWindowBgAlpha(0.5);
     ImGui::Begin(XorStr("Permashow").c_str(), 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoTitleBar);
-    ImGui::Text(XorStr("PERMASHOW").c_str());
-    ImGui::Separator();
     ImGui::Text(XorStr("Update: %f ms").c_str(), (float)dur.count());
+    ImGui::Separator();
     ImGui::End();
 
     this->overlay->RenderFrame(); 

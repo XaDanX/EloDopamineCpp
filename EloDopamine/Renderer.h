@@ -14,7 +14,8 @@ public:
 	void DrawCircleAt(const Vector3& worldPos, float radius, bool filled, int numPoints, ImColor color, float thickness) const;
 	ImDrawList* GetDrawList();
 
-
+	bool IsScreenPointOnScreen(const Vector2& point, float offsetX, float offsetY) const;
+	bool IsWorldPointOnScreen(const Vector3& point, float offsetX, float offsetY) const;
 	bool CustomGuiHotkey(int* k, const ImVec2& size_arg = ImVec2(50, 22));
 
 };

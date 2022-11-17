@@ -41,6 +41,8 @@ namespace OrbWalkerUtils {
 
 			if (!unit.targetable) continue;
 
+			if (!renderer->IsWorldPointOnScreen(unit.position, 0, 0)) continue;
+
 			if (unit.DistanceToHero(objectManager->GetLocalPlayer()) - unit.GetUnitInfo()->gameplayRadius > (objectManager->GetLocalPlayer().attackRange + objectManager->GetLocalPlayer().GetUnitInfo()->gameplayRadius)) continue;
 
 			auto distance = objectManager->GetLocalPlayer().DistanceToHero(unit);

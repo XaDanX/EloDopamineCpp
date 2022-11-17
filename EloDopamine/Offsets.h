@@ -5,6 +5,8 @@ class Offsets {
 public:
     Offsets();
     static int LocalPlayer;
+    static int HudInstance;
+    static int HudInstanceWorldMousePos;
 
     static int HeroInterface;
 
@@ -171,4 +173,7 @@ public:
 
     static int RendererWidth;
     static int RendererHeight;
+
+    // functions
+    static int CollisionFlag;
 };

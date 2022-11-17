@@ -19,6 +19,11 @@ private:
 	int windowHeight{ 0 };
 
 	int renderer{ 0 };
+
+	int hudInstance{ 0 };
+	Vector3 worldMousePos;
+
+	DWORD __cdecl CollisionFlag(float a1, float a2, float a3);
 		
 public:
 	void Update();
@@ -27,12 +32,17 @@ public:
 	int WindowWidth();
 	int WindowHeight();
 
+	Vector3 MouseWorldPos();
+
 	void UpdateLoopThread();
 	std::thread spawn() {
 		return std::thread([this] { this->UpdateLoopThread(); });
 	}
 
 	Vector2 WorldToScreen(const Vector3& pos);
+
+	bool IsNotWall(Vector3 pos);
+
 
 
 };

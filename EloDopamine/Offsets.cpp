@@ -3,31 +3,35 @@
 //"version": "12.21.4770420+branch.releases-12-21.content.release"
 Offsets::Offsets() {};
 
+//== HUD ==//
+int Offsets::HudInstance = 0x18a6fa4; // 8B ? ? ? ? ? 6A 00 8B ? ? E8 ? ? ? ? B0 01 ?
+int Offsets::HudInstanceWorldMousePos = 0x19C;
+//==RENDERER==//
 int Offsets::RendererWidth = 0x8;
 int Offsets::RendererHeight = 0xc;
 //== CORE ==//
-int	Offsets::ViewProjMatrices = 0x3181D70; //68 ? ? ? ? 51 8B 00
-int Offsets::LocalPlayer = 0x3157F40; //57 8B 3D ? ? ? ? 3B F7 75
-int Offsets::GameTime = 0x3152068; //F3 0F 11 05 ? ? ? ? 8B 49
-int Offsets::ObjectManager = 0x18BBEA8; //89 ? ? ? ? ? 57 C7 06 ? ? ? ? 66 C7 46 04 ? ?
-int Offsets::Renderer = 0x3187448; //8B 0D ? ? ? ? 50 E8 ? ? ? ? 5E 8B // A1 ?? ?? ?? ?? 56 57 BF ?? ?? ?? ?? 8B
+int	Offsets::ViewProjMatrices = 0x31696A0; //68 ? ? ? ? 51 8B 00
+int Offsets::LocalPlayer = 0x3143DA0; //57 8B 3D ? ? ? ? 3B F7 75
+int Offsets::GameTime = 0x313D244; //F3 0F 11 05 ? ? ? ? 8B 49
+int Offsets::ObjectManager = 0x18A6ED8; //89 ? ? ? ? ? 57 C7 06 ? ? ? ? 66 C7 46 04 ? ?
+int Offsets::Renderer = 0x316EE68; //8B 0D ? ? ? ? 50 E8 ? ? ? ? 5E 8B // A1 ?? ?? ?? ?? 56 57 BF ?? ?? ?? ?? 8B
 //== LISTS ==//
-int	Offsets::MissileInterface = 0x31588D0; //8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B 30 8B 36
-int	Offsets::MinionInterface = 0x25095CC; //8B 0D ? ? ? ? E8 ? ? ? ? EB 09 // A3 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 C4 04 85 C0 74 32
-int	Offsets::TurretInterface = 0x315089C; //8B 35 ? ? ? ? 8B 76 18 // 8D 44 24 0C 89 35 ? ? ? ? // A1 ? ? ? ? 53 56 8B 70 04
-int	Offsets::InhibitorInterface = 0x25095CC; //A1 ?? ?? ?? ?? 53 55 56 8B 70 04 8B 40 08
-int	Offsets::HeroInterface = 0x18BBF40; //89 44 24 18 A1 ? ? ? ? 53 // 8B 15 ? ? ? ? 0F 44 C1
+int	Offsets::MissileInterface = 0x3143DF0; //8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B 30 8B 36
+int	Offsets::MinionInterface = 0x24F45E0; //8B 0D ? ? ? ? E8 ? ? ? ? EB 09 // A3 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 C4 04 85 C0 74 32
+int	Offsets::TurretInterface = 0x313BA44; //8B 35 ? ? ? ? 8B 76 18 // 8D 44 24 0C 89 35 ? ? ? ? // A1 ? ? ? ? 53 56 8B 70 04
+int	Offsets::InhibitorInterface = 0x3143EFC; //A1 ?? ?? ?? ?? 53 55 56 8B 70 04 8B 40 08
+int	Offsets::HeroInterface = 0x18A6F70; //89 44 24 18 A1 ? ? ? ? 53 // 8B 15 ? ? ? ? 0F 44 C1
 int	Offsets::BuildingInterface = 0x1859378;
 int	Offsets::oGetHPBarPos = 0x30C9;  //E8 ?? ?? ?? ?? 8B 4E ?? 8D 54 ?? ?? 52 8B 01 FF ?? ?? 5E 83 ?? ?? C3
-int	Offsets::AINetClient = 0x315FDD4; //8B 0D ?? ?? ?? ?? 85 C9 74 06 8B 01 6A 01 FF 10 8B 0D ?? ?? ?? ?? C7 05 ?? ?? ?? ?? ?? ?? ?? ?? 85 C9 74 06 8B 01 6A 01 FF 10 C3 //C7 05 ? ? ? ? ? ? ? ? 85 C9 74 06 8B 01 6A 01 FF 10 C3 - //A1 ?? ?? ?? ?? 88 4C 24 13
+int	Offsets::AINetClient = 0x314868C; //8B 0D ?? ?? ?? ?? 85 C9 74 06 8B 01 6A 01 FF 10 8B 0D ?? ?? ?? ?? C7 05 ?? ?? ?? ?? ?? ?? ?? ?? 85 C9 74 06 8B 01 6A 01 FF 10 C3 //C7 05 ? ? ? ? ? ? ? ? 85 C9 74 06 8B 01 6A 01 FF 10 C3 - //A1 ?? ?? ?? ?? 88 4C 24 13
 int	Offsets::CpuInstance = AINetClient - 0x3C;
 //== MINIMAP STRUCTURE ==//
-int	Offsets::MinimapObject = 0x31520AC; //8B 1D ? ? ? ? 85 DB 74 19 //74 22 8B 0D ? ? ? ? 85 C9 74 18 80 79 38 00
+int	Offsets::MinimapObject = 0x313D288; //8B 1D ? ? ? ? 85 DB 74 19 //74 22 8B 0D ? ? ? ? 85 C9 74 18 80 79 38 00
 int	Offsets::MinimapObjectHud = 0x150;  //C7 44 24 ? ? ? ? ? E8 ? ? ? ? 8B B7 ? ? ? ? 8B //Tomar primer valor ejemplo [esp+120h+var_D4]
 int	Offsets::MinimapHudPos = 0x3C;
 int	Offsets::MinimapHudSize = 0x44;
 //== CHAT STRUCTURE ==//
-int	Offsets::Chat = 0x3158930; //8B 0D ? ? ? ? 8A D8 85 // 8B 0D ? ? ? ? 8A D8 85 C9 //8B 0D ? ? ? ? 83 78 44 00
+int	Offsets::Chat = 0x3143E4C; //8B 0D ? ? ? ? 8A D8 85 // 8B 0D ? ? ? ? 8A D8 85 C9 //8B 0D ? ? ? ? 83 78 44 00
 int	Offsets::ChatIsOpen = 0x6D8; //C7 86 ? ? ? ? ? ? ? ? E8 ? ? ? ? 83 C4 04 85 C0 75 30 F6 86 ? ? ? ? ? 75 1B 38 86 ? ? ? ?
 //== BUFF MANAGER STRUCTURE ==//
 int	Offsets::ObjBuffManager = 0x2330; //8D 83 ? ? ? ? 50 8D AB ? ? ? ? // //8b 81 ? ? ? ? 81 c1 ? ? ? ? 8b 40 0c ff e0 cc // 4 first characters are the offset
@@ -61,7 +65,7 @@ int	Offsets::OSpellInfoLevel = 0x58;
 int	Offsets::OSpellInfoName = 0x104;
 int	Offsets::OSpellInfoDataName = 0x6C;
 //== AI MANAGER STRUCTURE ==//
-int	Offsets::AIManager = 0x2E7C; //LPLAYER->VTABLE 149 MOV
+int	Offsets::AIManager = 0x2E84; //LPLAYER->VTABLE 149 MOV
 int	Offsets::AIManagerStartPath = 0x1CC;
 int	Offsets::AIManagerEndPath = 0x1D8;
 int	Offsets::AIManagerServPosition = 0x2EC;
@@ -103,6 +107,9 @@ int	Offsets::SpellSlotItemName = 0x13;
 int	Offsets::SpellBOOKActiveSpellCast = 0x20;  //always the same
 int	Offsets::SpellBOOKSpellSlots = 0x488; //always the same
 
+//== FUNCTIONS ==//
+int Offsets::CollisionFlag = 0x18a722c; // E8 ? ? ? ? 55 8A D8
+
 //== ObjECT ATTRIBUTES ==//
 int	Offsets::ObjIndex = 0x8;
 int	Offsets::ObjTeam = 0x34;
@@ -141,10 +148,10 @@ int	Offsets::ObjBonusAP = ObjBonusATK + 0x10;
 int	Offsets::ObjBonusAPMOD = ObjBonusAP + 0x4;
 int	Offsets::ObjATTACKSPEEDMOD = 0x1268;
 int	Offsets::ObjMOVESPEED = 0x1394;
-int	Offsets::ObjSpellBOOK = 0x29B8; //8B 84 83 ? ? ? ? EB 06 8B 83 ? ? ? ? 85 C0 0F 84 ? ? ? ? 53 8B CF E8 ? ? ? ? 8B C8 8B 10 FF 52 18 8B F0
-int	Offsets::ObjSpellBOK2 = 0x2510; //ObjSpellBOOK+0x20
+int	Offsets::ObjSpellBOOK = 0x29C0; //8B 84 83 ? ? ? ? EB 06 8B 83 ? ? ? ? 85 C0 0F 84 ? ? ? ? 53 8B CF E8 ? ? ? ? 8B C8 8B 10 FF 52 18 8B F0
+int	Offsets::ObjSpellBOK2 = 0x2518; //ObjSpellBOOK+0x20
 int	Offsets::ObjTRANSFORMATION = 0x3040;
-int	Offsets::ObjName = 0x2DA4;
+int	Offsets::ObjName = 0x2DAC;
 int	Offsets::ObjLVL = 0x358C; // ó 0x353C
 int	Offsets::ObjSIZEMULTIPLIER = 0x136C;
 int	Offsets::ObjEXPIRY = 0x298;
@@ -170,7 +177,7 @@ int	Offsets::ObjIsZombie = 0x3A;
 int	Offsets::ObjIsOnScreen = 0x278;
 int Offsets::ObjActionState = 0x1830;
 ////CHARDATA///
-int	Offsets::ObjPreCharData = 0x2E0C;
+int	Offsets::ObjPreCharData = 0x2D20;
 int	Offsets::ObjCharData = 0x1C;
 int	Offsets::ObjSelectionRadius = 0x54C;
 int	Offsets::ObjBoundingRadius = 0x458;

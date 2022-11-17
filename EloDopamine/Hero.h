@@ -39,6 +39,7 @@ public:
     Vector2 GetHealthBarPosition();
 
     float GetTotalAttackSpeed();
+    bool IsLethalTempoActive();
 
     float DistanceToHero(Hero hero); 
 

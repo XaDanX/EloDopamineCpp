@@ -4,6 +4,10 @@
 void Engine::Update() {
 	this->gameTime = memoryManager->Read<float>(memoryManager->BaseAddress() + Offsets::GameTime);
 
+	if (this->hudInstance == 0) {
+		this->hudInstance = memoryManager->Read<int>(memoryManager->BaseAddress() + Offsets::HudInstance);
+	}
+
 	char buff[128];
 
 	memoryManager->ReadBuffer(memoryManager->BaseAddress() + Offsets::ViewProjMatrices, buff, 128);
@@ -16,6 +20,10 @@ void Engine::Update() {
 	memoryManager->ReadBuffer(this->renderer, renderBuff, 0x14);
 	memcpy(&windowHeight, &renderBuff[Offsets::RendererHeight], sizeof(int));
 	memcpy(&windowWidth, &renderBuff[Offsets::RendererWidth], sizeof(int));
+
+	char hudBuff[0x200];
+	memoryManager->ReadBuffer(this->hudInstance, hudBuff, 0x200);
+	memcpy(&this->worldMousePos, &hudBuff[Offsets::HudInstanceWorldMousePos], sizeof(Vector3));
 
 
 }
@@ -32,12 +40,17 @@ int Engine::WindowHeight()
 	return this->windowHeight;
 }
 
+Vector3 Engine::MouseWorldPos() {
+	return this->worldMousePos;
+}
+
 void Engine::UpdateLoopThread() {
 	while (true) {
 		this->Update();
 		std::this_thread::sleep_for(1ms);
 	}
 }
+
 
 Vector2 Engine::WorldToScreen(const Vector3& pos) {
 	Vector2 out = { 0.f, 0.f };
@@ -61,4 +74,41 @@ Vector2 Engine::WorldToScreen(const Vector3& pos) {
 
 
 	return out;
+}
+
+
+DWORD __cdecl Engine::CollisionFlag(float a1, float a2, float a3)
+{
+
+
+	DWORD collisionFlag = memoryManager->Read<DWORD>(memoryManager->BaseAddress() + Offsets::CollisionFlag);
+
+	DWORD world = memoryManager->Read<DWORD>(collisionFlag + 0x4);
+	float fOffsetX = memoryManager->Read<float>(world + 0x64);
+	float fOffsetZ = memoryManager->Read<float>(world + 0x6C);
+	float fCellScale = memoryManager->Read<float>(world + 0x5AC);
+
+	int x = (int)(((a1 - fOffsetX) * fCellScale));
+	int y = (int)(((a3 - fOffsetZ) * fCellScale));
+
+	unsigned int target = memoryManager->Read<unsigned int>(world + 0x80);
+	unsigned int target2 = target + 0x8 * (memoryManager->Read<unsigned int>(world + 0x5A0) * y + x);
+	unsigned int target3 = memoryManager->Read<unsigned int>(target2);
+	unsigned short flag;
+	int target4;
+
+	if (target3 != 0) {
+		flag = memoryManager->Read<unsigned short>(target3 + 0x6);
+		target4 = target3;
+	}
+	else {
+		flag = memoryManager->Read<unsigned short>(target2 + 0x4);
+		target4 = memoryManager->Read<unsigned short>(target2 + 0x1);
+	}
+	target4 = target4 & 0xC00;
+	return flag;
+}
+
+bool Engine::IsNotWall(Vector3 pos) {
+	return !(CollisionFlag(pos.x, pos.y, pos.z) & 2);
 }

@@ -24,6 +24,15 @@ void Renderer::DrawCircleAt(const Vector3& worldPos, float radius, bool filled, 
 		canvas->AddPolyline(points, numPoints, color, true, thickness);
 }
 
+bool Renderer::IsScreenPointOnScreen(const Vector2& point, float offsetX, float offsetY) const {
+	return point.x > -offsetX && point.x < (engine->WindowWidth() + offsetX) && point.y > -offsetY && point.y < (engine->WindowWidth() + offsetY);
+}
+
+bool Renderer::IsWorldPointOnScreen(const Vector3& point, float offsetX, float offsetY) const {
+	return IsScreenPointOnScreen(engine->WorldToScreen(point), offsetX, offsetY);
+}
+
+
 ImDrawList* Renderer::GetDrawList() {
 	return ImGui::GetBackgroundDrawList();
 }

@@ -1,5 +1,6 @@
 #include "Hero.h"
 #include "ObjectManager.h"
+#include "XorStr.hpp"
 bool Hero::Load(unsigned int address, bool deepLoad) {
     if (!this->address)
         this->address = address;
@@ -80,7 +81,26 @@ Vector2 Hero::GetHealthBarPosition() {
 }
 
 float Hero::GetTotalAttackSpeed() {
-    return this->unitInfo->baseAttackSpeed * this->attackSpeedMult;
+    float attackSpeed = (this->attackSpeedMult - 1.0) * this->unitInfo->attackSpeedRatio + this->unitInfo->baseAttackSpeed;
+    if (attackSpeed <= 2.5) {
+        return attackSpeed;
+    }
+    if (IsLethalTempoActive()) {
+        return attackSpeed;
+    }
+    return 2.5;
+}
+
+bool Hero::IsLethalTempoActive() {
+
+    BuffManager heroBuffs = objectManager->GetLocalPlayer().GetBuffManager();
+
+    for (auto buff : heroBuffs.buffList) {
+        if (buff.name != XorStr("assets/perks/styles/precision/lethaltempo/lethaltempo.lua").c_str()) continue;
+        if (buff.count != 6) continue;
+        return true;
+    }
+    return false;
 }
 
 float Hero::DistanceToHero(Hero hero) {
