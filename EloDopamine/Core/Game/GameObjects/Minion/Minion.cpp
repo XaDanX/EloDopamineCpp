@@ -14,5 +14,9 @@ bool Minion::Load(unsigned int address, bool deepLoad) {
     memcpy(&position, &buff[Offsets::ObjPos], sizeof(Vector3));
     memcpy(&actionState, &buff[Offsets::ObjActionState], sizeof(uint16_t));
 
+    if (name.empty()) {
+        name = memoryManager->ReadString(this->address + Offsets::ObjName);
+    }
+
     return true;
 }

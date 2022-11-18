@@ -13,10 +13,11 @@ private:
     std::vector<Minion> enemyMinionList;
     std::vector<Minion> minionList;
 
+    std::vector<Minion> wardList;
+
     int heroListPtr = 0;
     int minionListPtr = 0;
 
-    int localPlayerPointer{ 0 };
     Hero localPlayer;
 
 
@@ -26,6 +27,8 @@ public:
     std::vector<Minion> GetMinionList();
     std::vector<Minion> GetAllyMinionList();
     std::vector<Minion> GetEnemyMinionList();
+
+    std::vector<Minion> GetWardList();
 
     Hero GetLocalPlayer();
 

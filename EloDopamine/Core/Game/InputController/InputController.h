@@ -33,7 +33,7 @@ public:
 
 	Vector2 GetCursorPosition();
 
-	void UpdateLoopThread();
+    [[noreturn]] void UpdateLoopThread();
 	std::thread spawn() {
 		return std::thread([this] { this->UpdateLoopThread(); });
 	}

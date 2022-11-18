@@ -137,7 +137,7 @@ Vector2 InputController::GetCursorPosition() {
 	return { (float)pos.x, (float)pos.y };
 }
 
-void InputController::UpdateLoopThread() {
+[[noreturn]] void InputController::UpdateLoopThread() {
 	while (true) {
 		this->Update();
 		std::this_thread::sleep_for(1ms);

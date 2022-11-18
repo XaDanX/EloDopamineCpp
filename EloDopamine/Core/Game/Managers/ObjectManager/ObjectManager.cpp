@@ -10,6 +10,7 @@ void ObjectManager::Update() {
     this->minionList.clear();
     this->enemyMinionList.clear();
     this->allyMinionList.clear();
+    this->wardList.clear();
 
     if (this->heroList.size() < 9) {
         this->heroList.clear();
@@ -31,12 +32,16 @@ void ObjectManager::Update() {
     for (int n : minionPointers) {
         Minion currentMinion = Minion();
         currentMinion.Load(n, false);
-        if (currentMinion.team == Team::BLUE || currentMinion.team == Team::RED) {
+        if ((currentMinion.team == Team::BLUE || currentMinion.team == Team::RED)
+                && currentMinion.name.find("trinket") == std::string::npos
+                && currentMinion.name.find("jammerdevice") == std::string::npos) {
             if (currentMinion.team == this->GetLocalPlayer().team)
                 this->allyMinionList.emplace_back(currentMinion);
             else
                 this->enemyMinionList.emplace_back(currentMinion);
             this->minionList.emplace_back(currentMinion);
+        } else if (currentMinion.name.find("trinket") != std::string::npos || currentMinion.name.find("jammerdevice") != std::string::npos) {
+            this->wardList.emplace_back(currentMinion);
         }
     }
 
@@ -60,6 +65,10 @@ std::vector<Minion> ObjectManager::GetAllyMinionList() {
 
 std::vector<Minion> ObjectManager::GetEnemyMinionList() {
     return this->enemyMinionList;
+}
+
+std::vector<Minion> ObjectManager::GetWardList() {
+    return this->wardList;
 }
 
 

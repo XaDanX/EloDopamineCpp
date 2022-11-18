@@ -81,7 +81,7 @@ Vector2 Hero::GetHealthBarPosition() {
 }
 
 float Hero::GetTotalAttackSpeed() {
-    float attackSpeed = (this->attackSpeedMult - 1.0) * this->unitInfo->attackSpeedRatio + this->unitInfo->baseAttackSpeed;
+    float attackSpeed = ((float)this->attackSpeedMult - 1.0) * this->unitInfo->attackSpeedRatio + this->unitInfo->baseAttackSpeed;
     if (attackSpeed <= 2.5) {
         return attackSpeed;
     }
@@ -95,7 +95,7 @@ bool Hero::IsLethalTempoActive() {
 
     BuffManager heroBuffs = objectManager->GetLocalPlayer().GetBuffManager();
 
-    for (auto buff : heroBuffs.buffList) {
+    for (const auto& buff : heroBuffs.buffList) {
         if (buff.name != XorStr("assets/perks/styles/precision/lethaltempo/lethaltempo.lua").c_str()) continue;
         if (buff.count != 6) continue;
         return true;
@@ -126,8 +126,8 @@ bool Hero::IsLocalPlayer() {
 }
 
 int Hero::ReadAiManager() {
-    int v1 = memoryManager->Read<__int8>(this->address + Offsets::AIManager);
-    int v2 = this->address + Offsets::AIManager - 8;
+    int v1 = (int)memoryManager->Read<__int8>(this->address + Offsets::AIManager);
+    int v2 = (int)this->address + Offsets::AIManager - 8;
     int v3 = memoryManager->Read<int>(v2 + 4);
     int v4 = memoryManager->Read<int>((v2 + (4 * v1 + 12)));
     v4 = v4 ^ (~v3);

@@ -60,20 +60,15 @@ namespace OrbWalkerUtils {
 void OrbWalker::OnUpdate() {
 
 	if (!OrbWalkerOptions::enabled) return;
-	ImDrawList* canvas = ImGui::GetBackgroundDrawList();
 
 	auto target = OrbWalkerUtils::GetBestTarget();
 
-	auto player_w = engine->WorldToScreen(objectManager->GetLocalPlayer().position);
 	auto target_w = engine->WorldToScreen(target.position);
 
-#if DEBUG
-	canvas->AddLine(ImVec2(player_w.x, player_w.y), ImVec2(target_w.x, target_w.y), ImColor(255, 255, 255, 150), 2);
-#endif
 	if (GetAsyncKeyState(OrbWalkerOptions::hotKey) & 0x8000) {
 		if (!target.IsLocalPlayer() && target.IsValidTarget()) {
 			if (OrbWalkerUtils::CanAttack()) {
-				inputController->IssueClickAt(target_w.x, target_w.y);
+				inputController->IssueClickAt((int)target_w.x, (int)target_w.y);
 				OrbWalkerUtils::lastAutoAttackTick = GetTickCount();
 				OrbWalkerUtils::lastMoveTick = GetTickCount() + OrbWalkerUtils::GetWindupTime();
 				return;

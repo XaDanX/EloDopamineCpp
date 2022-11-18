@@ -33,7 +33,7 @@ public:
     AiManager aiManager = AiManager();
 
 public:
-    bool Load(unsigned int address, bool deepLoad);
+    bool Load(unsigned int address, bool deepLoad) override;
     void UpdateSpells();
 
     Vector2 GetHealthBarPosition();

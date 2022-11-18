@@ -5,6 +5,7 @@
 
 class Minion : public GameObject {
 public:
+    std::string name;
     bool Load(unsigned int address, bool deepLoad);
 
 };

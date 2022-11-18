@@ -2,11 +2,11 @@
 #include "../../Core/Game/Managers/ModuleManager/Module.h"
 class Avareness : public ModuleBase {
 public:
-	void OnUpdate();
-	void OnGui();
-	std::string ModuleType();
-	std::string GetName();
-	void OnInitialize();
-	void OnExit();
+	void OnUpdate() override;
+	void OnGui() override;
+	std::string ModuleType() override;
+	std::string GetName() override;
+	void OnInitialize() override;
+	void OnExit() override;
 };
 

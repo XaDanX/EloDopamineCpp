@@ -12,6 +12,14 @@
 void EloDopamine::OnUpdate() {
     moduleManager->UpdateModules();
     renderer->DrawCircleAt(engine->MouseWorldPos(), 30, true, 100, engine->IsNotWall(engine->MouseWorldPos()) ? ImColor(0, 255, 0, 150) : ImColor(255, 0, 0, 150), 1);
+
+    for (auto& minion : objectManager->GetMinionList()) {
+        renderer->DrawCircleAt(minion.position, 30, true, 6, ImColor(255, 0, 255, 150), 1);
+    }
+    for (auto& minion : objectManager->GetWardList()) {
+        renderer->DrawCircleAt(minion.position, 30, true, 6, ImColor(0, 0, 255, 150), 1);
+    }
+
 }
 
 void EloDopamine::OnGui() {

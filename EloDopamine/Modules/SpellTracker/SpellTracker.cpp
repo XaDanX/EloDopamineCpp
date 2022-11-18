@@ -1,6 +1,5 @@
 #include "SpellTracker.h"
 #include "../../Core/Game/Managers/ObjectManager/ObjectManager.h"
-#include "../../Core/Game/Engine/Engine.h"
 #include "../../Core/Game/Renderer/Renderer.h"
 #include "../../Core/Security/XorStr.hpp"
 
