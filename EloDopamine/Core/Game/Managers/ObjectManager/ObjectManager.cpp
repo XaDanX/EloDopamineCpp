@@ -34,7 +34,8 @@ void ObjectManager::Update() {
         currentMinion.Load(n, false);
         if ((currentMinion.team == Team::BLUE || currentMinion.team == Team::RED)
                 && currentMinion.name.find("trinket") == std::string::npos
-                && currentMinion.name.find("jammerdevice") == std::string::npos) {
+                && currentMinion.name.find("jammerdevice") == std::string::npos
+                   && currentMinion.name.find("minion") != std::string::npos) {
             if (currentMinion.team == this->GetLocalPlayer().team)
                 this->allyMinionList.emplace_back(currentMinion);
             else
