@@ -1,8 +1,8 @@
 #include <iostream>
-#include "Logger.h"
-#include "Offsets.h"
-#include "EloDopamine.h"
-#include "GameData.h"
+#include "Core/Utils/Logger.h"
+#include "Core/Game/Offsets.h"
+#include "Core/EloDopamine/EloDopamine.h"
+#include "Core/Game/GameData/GameData.h"
 #include <cstdlib>
 #include <csignal>
 
