@@ -78,6 +78,14 @@ public:
 
     static int SpellInfoSpellName;
 
+    static int ActiveSpell;
+    static int ActiveSpellStartPos;
+    static int ActiveSpellEndPos;
+    static int ActiveSpellInfo;
+    static int ActiveSpellName;
+    static int ActiveSpellCastTime;
+    static int ActiveSpellEndTime;
+
     static int SpellSlotTime;
     static int SpellSlotCharges;
     static int SpellSlotTimeCharge;

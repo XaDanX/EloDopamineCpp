@@ -1,6 +1,8 @@
 #include "ModuleManager.h"
 #include "../../../../imgui/imgui.h"
 #include "../../../Security/XorStr.hpp"
+#include "../../../../Modules/Evade/Evade.h"
+
 void ModuleManager::RegisterModule(ModuleBase* module) {
 
 	if (module->ModuleType() != XorStr("utility").c_str()) {
@@ -25,6 +27,7 @@ void ModuleManager::RegisterModules() {
 	this->RegisterModule(new SpellTracker());
 	this->RegisterModule(new OrbWalker());
 	this->RegisterModule(new Avareness());
+    this->RegisterModule(new Evade());
 }
 
 void ModuleManager::Initialize() {

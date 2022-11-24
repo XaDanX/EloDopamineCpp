@@ -1,17 +1,71 @@
 #include "EloDopamine.h"
 #include "../Game/Renderer/Renderer.h"
-#include "../../imgui/imgui.h"
-#include <chrono>
 #include "../Game/Managers/ModuleManager/ModuleManager.h"
-#include "../Game/GameData/GameData.h"
 #include <thread>
-#include <iostream>
+#include "numbers"
 #include "../Game/Managers/TextureManager/TextureManager.h"
-#include <filesystem>
 
 void EloDopamine::OnUpdate() {
     moduleManager->UpdateModules();
-    renderer->DrawCircleAt(engine->MouseWorldPos(), 30, true, 100, engine->IsNotWall(engine->MouseWorldPos()) ? ImColor(0, 255, 0, 150) : ImColor(255, 0, 0, 150), 1);
+    renderer->DrawCircleAt(engine->MouseWorldPos(), 30, true, 100,
+                           engine->IsNotWall(engine->MouseWorldPos()) ? ImColor(0, 255, 0, 150) : ImColor(255, 0, 0,
+                                                                                                          150), 1);
+    /*
+    for (Hero& hero : objectManager->GetHeroList()) {
+        auto active = hero.GetActiveSpell();
+        if (active.has_value()) {
+            if (active->startTime + active->spellInfo->castTime < engine->GameTime()) {
+                if (engine->GameTime() > active->endTime - active->spellInfo->castTime) continue;
+
+                auto direction = active->endPos.sub(active->startPos).normalize();
+
+                auto deltaTime = (engine->GameTime() - active->startTime);
+                if (deltaTime - active->spellInfo->delay < 0.0) {continue;}
+                auto centerPos = active->startPos.add(direction.mult(active->spellInfo->speed * (deltaTime - active->spellInfo->castTime)));
+
+                auto width = active->spellInfo->width;
+                auto height = active->spellInfo->height;
+
+                auto startCenter = centerPos.sub(direction.mult(height / 2).rotate_y(std::numbers::pi));
+                auto length = startCenter.distance(active->endPos);
+
+
+                auto startLower = startCenter.add(direction.mult(width).rotate_y(std::numbers::pi / 2));
+                auto startUpper = startCenter.add(direction.mult(width).rotate_y(std::numbers::pi * 3 / 2));
+                auto endLower = startLower.add(direction.mult(length));
+                auto endUpper = startUpper.add(direction.mult(length));
+
+
+                auto a1 = engine->WorldToScreen(startLower);
+                auto a2 = engine->WorldToScreen(startUpper);
+                auto a3 = engine->WorldToScreen(endLower);
+                auto a4 = engine->WorldToScreen(endUpper);
+                static ImVec2 points[5];
+                points[0] = ImVec2(a1.x, a1.y);
+                points[1] = ImVec2(a2.x, a2.y);
+                points[3] = ImVec2(a3.x, a3.y);
+                points[2] = ImVec2(a4.x, a4.y);
+                points[4] = ImVec2(a1.x, a1.y);
+                renderer->GetDrawList()->AddConvexPolyFilled(points, 5, ImColor(2555, 255, 255, 190));
+
+
+                renderer->GetDrawList()->AddLine(ImVec2(a1.x, a1.y), ImVec2(a2.x, a2.y),
+                                                 ImColor(0, 0, 255, 150), 3);
+                renderer->GetDrawList()->AddLine(ImVec2(a1.x, a1.y), ImVec2(a3.x, a3.y),
+                                                 ImColor(0, 0, 255, 150), 3);
+                renderer->GetDrawList()->AddLine(ImVec2(a4.x, a4.y), ImVec2(a3.x, a3.y),
+                                                 ImColor(0, 0, 255, 150), 3);
+                renderer->GetDrawList()->AddLine(ImVec2(a2.x, a2.y), ImVec2(a4.x, a4.y),
+                                                 ImColor(0, 0, 255, 150), 3);
+            } else {
+                auto startPoint = engine->WorldToScreen(active->startPos);
+                renderer->GetDrawList()->AddText(ImVec2(startPoint.x, startPoint.y), ImColor(255, 0, 0, 255), "Not yet casted");
+            }
+
+        }
+
+    }*/
+
 }
 
 void EloDopamine::OnGui() {

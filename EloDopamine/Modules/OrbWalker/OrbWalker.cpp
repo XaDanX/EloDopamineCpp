@@ -73,6 +73,13 @@ void OrbWalker::OnUpdate() {
 				OrbWalkerUtils::lastMoveTick = GetTickCount() + OrbWalkerUtils::GetWindupTime();
 				return;
 			}
+            if (OrbWalkerUtils::CanMove()) {
+                if (objectManager->GetLocalPlayer().Q_SPELL.IsReady()) {
+                    inputController->IssueClickButtonAt((int)target_w.x, (int)target_w.y, HKey::Q);
+                    OrbWalkerUtils::lastMoveTick = GetTickCount() + 80;
+                }
+
+            }
 		}
 		if (OrbWalkerUtils::CanMove()) {
 			inputController->IssueClick();

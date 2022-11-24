@@ -109,6 +109,9 @@ struct Vector3 {
     [[nodiscard]] Vector3 sub(const Vector3& o) const {
         return {x - o.x, y - o.y, z - o.z};
     }
+    [[nodiscard]] Vector3 mult(const float multip) const {
+        return {x * multip, y * multip, z * multip};
+    }
 
     [[nodiscard]] Vector3 clone() const {
         return {x, y, z};

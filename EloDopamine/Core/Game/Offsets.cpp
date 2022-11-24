@@ -110,6 +110,15 @@ int	Offsets::SpellBOOKSpellSlots = 0x488; //always the same
 //== FUNCTIONS ==//
 int Offsets::CollisionFlag = 0x18a722c; // E8 ? ? ? ? 55 8A D8
 
+//==ACTIVE SPELL ==//
+int	Offsets::ActiveSpell = 0x2518;
+int	Offsets::ActiveSpellStartPos = 0x88;
+int	Offsets::ActiveSpellEndPos = 0x94;
+int	Offsets::ActiveSpellInfo = 0x8;
+int	Offsets::ActiveSpellName = 0x18;
+int	Offsets::ActiveSpellCastTime = 0x108;
+int	Offsets::ActiveSpellEndTime = 0x148;
+
 //== ObjECT ATTRIBUTES ==//
 int	Offsets::ObjIndex = 0x8;
 int	Offsets::ObjTeam = 0x34;

@@ -20,6 +20,7 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
     memcpy(&buffManagerAddress, &buff[Offsets::ObjBuffManager], sizeof(int));
     memcpy(&buffManagerStart, &buff[Offsets::ObjBuffManager + 0x10], sizeof(int));
     memcpy(&buffManagerEnd, &buff[Offsets::ObjBuffManager + 0x14], sizeof(int));
+    memcpy(&activeSpellAddress, &buff[Offsets::ActiveSpell], sizeof(int));
 
     bool alive;
     memcpy(&alive, &buff[Offsets::ObjDead], sizeof(BYTE));
@@ -42,6 +43,12 @@ bool Hero::Load(unsigned int address, bool deepLoad) {
     if (this->aiManager.address == 0) {
         this->aiManager.address = this->ReadAiManager();
         //logger->Debug("%#08x", this->aiManager.address);
+    }
+
+    if (this->activeSpellAddress != 0) {
+        this->activeSpell.Load(this->activeSpellAddress);
+    } else {
+        this->activeSpell = ActiveSpell();
     }
 
 
@@ -137,4 +144,10 @@ int Hero::ReadAiManager() {
 BuffManager& Hero::GetBuffManager() {
     this->buffManager.Update(this->buffManagerAddress, this->buffManagerStart, this->buffManagerEnd);
     return this->buffManager;
+}
+std::optional<ActiveSpell> Hero::GetActiveSpell() {
+    if (this->activeSpellAddress != 0) {
+        return this->activeSpell;
+    }
+    return std::nullopt;
 }

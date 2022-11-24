@@ -8,6 +8,7 @@
 #include "../../GameData/GameData.h"
 #include "AiManager/AiManager.h"
 #include "BuffManager/BuffManager.h"
+#include "ActiveSpell/ActiveSpell.h"
 
 class Hero : public GameObject {
 private:
@@ -17,6 +18,9 @@ private:
     int buffManagerAddress;
     int buffManagerStart;
     int buffManagerEnd;
+
+    int activeSpellAddress = 0;
+    ActiveSpell activeSpell;
 
 public:
     std::string championName;
@@ -50,6 +54,8 @@ public:
     int ReadAiManager();
 
     BuffManager& GetBuffManager();
+
+    std::optional<ActiveSpell> GetActiveSpell();
 
 
 };
